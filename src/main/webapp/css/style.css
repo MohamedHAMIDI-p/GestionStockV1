@@ -1,0 +1,155 @@
+/* ===== Général ===== */
+* { box-sizing: border-box; }
+
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f4f6f9;
+	margin: 0;
+	padding: 30px;
+	color: #333;
+}
+
+h1 { color: #2c3e50; margin: 0 0 25px; }
+
+/* ===== Mise en page : contenu centré ===== */
+.page {
+	max-width: 1000px;           /* largeur du contenu, à ajuster */
+	margin: 0 auto;              /* marges automatiques : la page est centrée horizontalement */
+}
+
+/* Variante plus étroite pour la page de détails (doit rester après .page) */
+.page.page-etroite { max-width: 720px; }
+
+.card {
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+	padding: 24px;
+}
+
+/* Titre et compteur centrés */
+.card-header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	gap: 6px;
+	margin-bottom: 18px;
+}
+.card-header h1 { margin: 0; }
+.compteur { color: #666; font-size: 14px; }
+
+/* ===== Tableau de la liste, dans une zone défilante ===== */
+.table-wrapper {
+	max-height: 60vh;            /* 60 % de la hauteur de l'écran : au-delà, barre de défilement */
+	overflow: auto;
+	border: 1px solid #e5e7eb;
+	border-radius: 6px;
+}
+
+.table-liste {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.table-liste th,
+.table-liste td {
+	padding: 10px 14px;
+	border-bottom: 1px solid #e5e7eb;
+	text-align: left;
+}
+
+.table-liste thead th {
+	position: sticky;            /* l'en-tête reste visible pendant le défilement */
+	top: 0;
+	z-index: 1;
+	background: #eaf0f6;
+	color: #2c3e50;
+}
+
+.table-liste tbody tr:hover { background: #f1f7ff; }
+
+/* Pas de retour à la ligne : en-têtes, prix, TVA et lien Détails */
+.table-liste th,
+.table-liste .nowrap { white-space: nowrap; }
+.table-liste .num { text-align: right; white-space: nowrap; }
+
+/* ===== Pagination (centrée) ===== */
+.pagination {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin-top: 18px;
+}
+
+.pagination a,
+.pagination span {
+	padding: 6px 12px;
+	border: 1px solid #d0d7de;
+	border-radius: 4px;
+	background: #fff;
+	color: #2874a6;
+	text-decoration: none;
+}
+
+.pagination a:hover { background: #eaf0f6; }
+.pagination .actif { background: #2874a6; border-color: #2874a6; color: #fff; font-weight: bold; }
+.pagination .desactive { background: #f4f6f9; color: #aaa; }
+
+/* ===== Tableau de la page de détails (centré dans la carte) ===== */
+.table-detail {
+	width: 100%;
+	max-width: 650px;
+	margin: 0 auto;
+	border-collapse: collapse;
+}
+
+.table-detail th,
+.table-detail td {
+	padding: 14px 18px;
+	border-bottom: 1px solid #e5e7eb;
+	text-align: left;
+}
+
+.table-detail th {
+	width: 200px;
+	background: #eaf0f6;
+	color: #2c3e50;
+}
+
+.table-detail tr:hover { background: #f1f7ff; }
+
+.message-erreur {
+	color: #c0392b;
+	text-align: center;
+}
+
+/* ===== Lien retour ===== */
+.actions { text-align: center; }
+
+.retour {
+	display: inline-block;
+	margin-top: 25px;
+	padding: 10px 18px;
+	background: #2874a6;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 5px;
+}
+.retour:hover { background: #1b4f72; }
+
+/* ===== Accessibilité : focus visible au clavier ===== */
+.pagination a:focus-visible,
+.table-liste a:focus-visible,
+.retour:focus-visible {
+	outline: 2px solid #2874a6;
+	outline-offset: 2px;
+}
+
+/* ===== Petits écrans ===== */
+@media (max-width: 600px) {
+	body { padding: 12px; }
+	.card { padding: 16px; }
+}
