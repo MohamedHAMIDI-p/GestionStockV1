@@ -1,0 +1,23 @@
+   33  git init
+   34  git add .
+   35  git commit -m "initialisation projet gestion de stock"
+   36  git branch -M main
+   37  echo "# GestionStockV1" >> README.md
+   38  git add README.md
+   39  git add.
+   40  git add .
+   41  git remote add origin git@github.com:MohamedHAMIDI-p/GestionStockV1.git
+   42  git branch -M main
+   43  git push -u origin main
+   44  git remote -v
+   45  get remote set-url origin git@github.com:MohamedHAMIDI-p/GestionStockV1.git
+   46  git remote set-url origin git@github.com:MohamedHAMIDI-p/GestionStockV1.git
+   47  git push -u origin main
+   48  ssh -T git@github.com
+   49  git remote add origin git@github.com:MohamedHAMIDI-p/GestionStockV1.git
+   50  git remote -v
+   51  git status
+   53  git push -u origin main
+   54  git remote set-url origin https://github.com/MohamedHAMIDI-p/GestionStockV1.git
+   55  git commit -m "Ajout du README"
+   56  git push -u origin main
