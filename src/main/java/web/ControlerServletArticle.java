@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.Impl.ArticleDaoImpl;
+import dto.ArticleDetailDto;
 import dto.ArticleDto;
 import exception.EntityNotFoundException;
 import exception.ErreurCodes;
@@ -85,7 +86,7 @@ private void afficherDetArticle(HttpServletRequest req,
     int status = HttpServletResponse.SC_OK;
     String json = "";
 
-    Article article = null;
+    ArticleDetailDto article = null;
     String erreur = null;
 
     if (code == null || code.trim().isEmpty()) {
@@ -99,7 +100,7 @@ private void afficherDetArticle(HttpServletRequest req,
 
         try {
 
-            article = articleService.trouverArticle(code.trim());
+            article = articleService.trouverDetailArticle(code.trim());
 
             json = JsonUtil.toPrettyJson(article);
 

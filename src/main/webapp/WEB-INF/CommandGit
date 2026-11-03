@@ -21,3 +21,8 @@
    54  git remote set-url origin https://github.com/MohamedHAMIDI-p/GestionStockV1.git
    55  git commit -m "Ajout du README"
    56  git push -u origin main
+   58  git status
+   59  git add .
+   60  git commit -m "ajouter fichier git"
+   61  git push
+   

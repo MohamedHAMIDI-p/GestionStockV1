@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import dao.ArticleDao;
+import dto.ArticleDetailDto;
 import dto.ArticleDto;
 import exception.EntityNotFoundException;
 import exception.ErreurCodes;
@@ -78,6 +79,8 @@ public class ArticleServiceImpl implements ArticleService {
 		
 	}
 
+	
+	
 	@Override
 	public List<Article> findListArticle() throws SQLException {
 		
@@ -87,5 +90,16 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public List<ArticleDto> findListArticleDto() throws SQLException {
 		return articleDao.findAllArticleDto();
+	}
+
+	@Override
+	public ArticleDetailDto trouverDetailArticle(String codeArticle) throws SQLException {
+		
+		ArticleDetailDto a =articleDao.FindArtDetbyCodeArticle(codeArticle);
+		
+		if (a==null) {
+			throw new EntityNotFoundException("Article introuvable :"+codeArticle, ErreurCodes.ARTICLE_NOT_FOUND);
+		}
+		return a;
 	}
 }

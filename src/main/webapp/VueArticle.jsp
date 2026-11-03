@@ -42,15 +42,18 @@
 					</tr>
 					<tr>
 						<th>TVA</th>
-						<td><c:out value="${article.tvaArticle.taux}" /> %</td>
+						<td><c:out value="${article.tvaArticle}" /> %</td>
+					</tr>
+						<th>Nom Categorie</th>
+						<td><c:out value="${article.nomCategory}"></c:out></td>
 					</tr>
 					<tr>
-						<th>ID catégorie</th>
-						<td><c:out value="${article.idCategory}" /></td>
+						<th>Nom Fournisseur</th>
+						<td><c:out value="${article.nomFournisseur}"></c:out></td>
 					</tr>
 					<tr>
-						<th>ID fournisseur</th>
-						<td><c:out value="${article.idFournisseur}" /></td>
+						<th>Cnuf Fournisseur</th>
+						<td><c:out value="${article.cnufFournisseur}"></c:out></td>
 					</tr>
 					<tr>
 						<th>Date création</th>

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.ArticleDao;
+import dto.ArticleDetailDto;
 import dto.ArticleDto;
 import exception.TvaArticle;
 import model.Article;
@@ -54,6 +55,43 @@ public class ArticleDaoImpl implements ArticleDao {
 		}
 	}
 
+	@Override
+	public ArticleDetailDto FindArtDetbyCodeArticle(String codeArticle) throws SQLException {
+
+		String sql="SELECT a.codeArticle, a.designation, a.prixAchatArticle, a.prixVenteArticle, "
+				+ "a.prixRevient, a.tvaArticle, a.dateCreation, a.dateModification, "
+				+ "c.nomCategory,f.cnuf, f.nomFournisseur "
+				+ "FROM article a "
+				+ "LEFT JOIN category c ON a.idCategory = c.id "
+				+ "LEFT JOIN fournisseur f ON a.idFournisseur = f.id "
+				+ "WHERE a.codeArticle = ? ";
+		try (Connection cn=util.utilConnexion.getConn();
+				PreparedStatement ps=cn.prepareStatement(sql))
+		{
+			ps.setString(1,codeArticle );
+			try (ResultSet rs=ps.executeQuery())
+				{
+				if(rs.next()) {
+					ArticleDetailDto a=new ArticleDetailDto();
+					a.setCodeArticle(rs.getString("codeArticle"));
+					a.setDesignation(rs.getString("designation"));
+					a.setPrixAchatArticle(rs.getDouble("prixAchatArticle"));
+					a.setPrixVenteArticle(rs.getDouble("prixVenteArticle"));
+					a.setPrixRevient(rs.getDouble("prixRevient"));
+					a.setTvaArticle(TvaArticle.fromTaux(rs.getInt("tvaArticle")));
+					a.setDateCreation(rs.getTimestamp("dateCreation"));
+					a.setDateModification(rs.getTimestamp("dateModification"));
+					a.setNomCategory(rs.getString("nomCategory"));
+					a.setCnufFournisseur(rs.getString("cnuf"));
+					a.setNomFournisseur(rs.getString("nomFournisseur"));
+					
+					return a;
+	
+				}
+				return null;
+				}
+		}
+	}
 	@Override
 	public List<Article> findAllArticle() throws SQLException {
 		
@@ -129,6 +167,12 @@ public class ArticleDaoImpl implements ArticleDao {
 		return a;
 		
 	}
-
+	
+private ArticleDetailDto mapArticleDet(ResultSet rs) throws SQLException {
+		
+		
+		return null;
+		
+	}
 	
 }
