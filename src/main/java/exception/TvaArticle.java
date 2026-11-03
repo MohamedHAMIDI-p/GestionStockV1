@@ -19,7 +19,7 @@ public enum TvaArticle {
 	
 	@Override
 	public String toString() {
-		return taux + " %";
+		return taux + "";
 	}
 	
 	public static TvaArticle fromTaux(int taux) {
