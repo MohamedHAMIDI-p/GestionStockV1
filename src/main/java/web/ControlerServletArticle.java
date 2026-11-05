@@ -25,7 +25,7 @@ import util.pageLire;
 public class ControlerServletArticle extends HttpServlet {
 	
 	private static final long serialVersionUID= 1L;
-	private static final int TAILLE_PAGE=10;
+	private static final int TAILLE_PAGE=5;
 	
 	private ArticleService articleService;
 	

@@ -19,7 +19,7 @@ public class ArticleDaoImpl implements ArticleDao {
 	@Override
 	public void saveArticle(Article a) throws SQLException {
 
-		String sql="INSERT INTO article (codeArticle,designation,idCategory,idFournisseur,dateCreation,dateModification,prixAchatArticle,prixVenteArticle,prixRevient,tvaArticle) VALUES (?,?,?,?,NOW(), NOW(),?,?,?,?)";
+		String sql="INSERT INTO article (codeArticle,designation,idCategory,idFournisseur,dateCreation,dateModification,prixAchatArticle,prixVenteArticle,prixRevient,tvaArticle,stockActuel) VALUES (?,?,?,?,NOW(), NOW(),?,?,?,?,?)";
 		Connection cn=util.utilConnexion.getConn();
 		PreparedStatement ps = cn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 		ps.setString(1, a.getCodeArticle());
@@ -32,6 +32,7 @@ public class ArticleDaoImpl implements ArticleDao {
 		ps.setDouble(6, a.getPrixVenteArticle());
 		ps.setDouble(7, a.getPrixRevient());
 		ps.setDouble(8, a.getTvaArticle().getTaux());
+		ps.setInt(9, a.getStockActuel());
 		ps.executeUpdate();
 		ResultSet keys=ps.getGeneratedKeys();
 		if(keys.next()) {
@@ -59,7 +60,7 @@ public class ArticleDaoImpl implements ArticleDao {
 	public ArticleDetailDto FindArtDetbyCodeArticle(String codeArticle) throws SQLException {
 
 		String sql="SELECT a.codeArticle, a.designation, a.prixAchatArticle, a.prixVenteArticle, "
-				+ "a.prixRevient, a.tvaArticle, a.dateCreation, a.dateModification, "
+				+ "a.prixRevient, a.tvaArticle,a.stockActuel, a.dateCreation, a.dateModification, "
 				+ "c.nomCategory,f.cnuf, f.nomFournisseur "
 				+ "FROM article a "
 				+ "LEFT JOIN category c ON a.idCategory = c.id "
@@ -84,6 +85,7 @@ public class ArticleDaoImpl implements ArticleDao {
 					a.setNomCategory(rs.getString("nomCategory"));
 					a.setCnufFournisseur(rs.getString("cnuf"));
 					a.setNomFournisseur(rs.getString("nomFournisseur"));
+					a.setStockActuel(rs.getInt("stockActuel"));
 					
 					return a;
 	
@@ -113,6 +115,7 @@ public class ArticleDaoImpl implements ArticleDao {
 		List<ArticleDto> lisArtdto = new ArrayList<ArticleDto>();
 		String sql="SELECT a.codeArticle, a.designation, "
 	            + "a.prixVenteArticle, a.tvaArticle, "
+				+"a.stockActuel,"
 	            + "f.cnuf,c.nomCategory, f.nomFournisseur "
 	            + "FROM article a "
 	            + "LEFT JOIN category c ON a.idCategory = c.id "
@@ -131,6 +134,7 @@ public class ArticleDaoImpl implements ArticleDao {
 				artDto.setCnufFournisseur(rs.getString("cnuf"));
 				artDto.setNomCategory(rs.getString("nomCategory"));
 				artDto.setNomFournisseur(rs.getString("nomFournisseur"));
+				artDto.setStockActuel(rs.getInt("stockActuel"));
 				lisArtdto.add(artDto);
 			}
 		}
@@ -164,6 +168,7 @@ public class ArticleDaoImpl implements ArticleDao {
 		a.setPrixVenteArticle(rs.getDouble("prixVenteArticle"));
 		a.setPrixRevient(rs.getDouble("prixRevient"));
 		a.setTvaArticle(TvaArticle.fromTaux(rs.getInt("tvaArticle")));
+		a.setStockActuel(rs.getInt("stockActuel"));
 		return a;
 		
 	}

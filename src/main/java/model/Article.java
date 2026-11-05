@@ -14,6 +14,7 @@ public class Article extends AbstractEntity {
 	private TvaArticle tvaArticle;
 	private int idCategory;
 	private int idFournisseur;
+	private int stockActuel;
 	
 	public Article(int id, String codeArticle, String designation, int idCategory, int idFournisseur,Date dateCreation,Date dateModification) {
 		super(id, dateCreation, dateModification);
@@ -112,7 +113,14 @@ public class Article extends AbstractEntity {
 		this.tvaArticle = tvaArticle;
 	}
 	
-	
+	public int getStockActuel() {
+		return stockActuel;
+	}
+
+	public void setStockActuel(int stockActuel) {
+		this.stockActuel = stockActuel;
+	}
+
 	@Override
 	public String toString() {
 
@@ -125,6 +133,7 @@ public class Article extends AbstractEntity {
 				+ "           TvaArticle="+ tvaArticle+",\r\n"
 				+ "           IdCategory="+idCategory+",\r\n"
 				+ "           IdFournisseur="+idFournisseur+",\r\n"
+				+ "           stockActuel="+stockActuel+",\r\n"
 				+super.toString()+"]";
 	}
 	

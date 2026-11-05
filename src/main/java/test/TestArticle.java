@@ -45,7 +45,7 @@ public class TestArticle {
 			a.setTvaArticle(TvaArticle.fromTaux(7));
 			a.setIdCategory(3);
 			a.setIdFournisseur(1);
-			service.ajouterArticle(a);
+			//service.ajouterArticle(a);
 			System.out.println("================================================");
 			System.out.println("=============Afficher Article====================");	
 			article = service.trouverArticle("ART013");

@@ -18,6 +18,7 @@ public class ArticleDetailDto extends AbstractEntity {
 	private double PrixAchatArticle;
 	private double PrixVenteArticle;
 	private double PrixRevient;
+	private int stockActuel;
 	
 	
 	public ArticleDetailDto() {
@@ -151,6 +152,16 @@ public class ArticleDetailDto extends AbstractEntity {
 
 	public void setPrixRevient(double prixRevient) {
 		PrixRevient = prixRevient;
+	}
+
+
+	public int getStockActuel() {
+		return stockActuel;
+	}
+
+
+	public void setStockActuel(int stockActuel) {
+		this.stockActuel = stockActuel;
 	}
 	
 	

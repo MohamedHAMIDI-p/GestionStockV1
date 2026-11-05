@@ -36,7 +36,8 @@
 								<th>Catégorie</th>
 								<th>Fournisseur</th>
 								<th class="num">Prix de vente</th>
-								<th>TVA</th>
+								<th>TVA </th>
+								<th>Stock Actuel</th>
 								<th></th>
 							</tr>
 						</thead>
@@ -51,7 +52,8 @@
 									<td><c:out value="${a.nomCategory}" /></td>
 									<td><c:out value="${a.nomFournisseur}" /></td>
 									<td class="num"><fmt:formatNumber value="${a.prixVente}" minFractionDigits="2" maxFractionDigits="2" /></td>
-									<td><c:out value="${a.tvaArt.taux}" /> %</td>
+									<td><c:out value="${a.tvaArt.taux}" />%</td>
+									<td><c:out value="${a.stockActuel}" /></td>
 									<td><a href="${urlDetail}">Détails</a></td>
 								</tr>
 							</c:forEach>

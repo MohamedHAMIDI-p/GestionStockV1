@@ -38,3 +38,13 @@ ALTER TABLE fournisseur
   ADD COLUMN prixVenteArticle DECIMAL(12,2) NOT NULL DEFAULT 0,
   ADD COLUMN prixRevient      DECIMAL(12,2) NOT NULL DEFAULT 0,
   ADD COLUMN tvaArticle       TINYINT       NOT NULL DEFAULT 20;
+  
+  
+  
+  USE gestionstockV1;
+  
+  --    Cette colonne n'est modifiée que par l'enregistrement d'un mouvement.
+  ALTER TABLE article
+  ADD COLUMN stockActuel INT NOT NULL DEFAULT 0;
+  
+  

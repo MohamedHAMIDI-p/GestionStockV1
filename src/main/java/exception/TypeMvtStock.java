@@ -2,45 +2,47 @@ package exception;
 
 public enum TypeMvtStock {
 
-	reception("ReceptionFournisseur",1),
-	vente("vente",2),
-	retourEntre("RetourClient",3),
-	retourSortie("RetourFournisseur",4),
-	CorrectionPlus("Correction en plus",5),
-	CorrectionMoins("Correction en moins",6);
+	//entre stock
+	reception("ReceptionFournisseur",1,false),
+	retourEntre("RetourClient",1,false),
 	
-	private int CodeMvt;
-	private String libelle;
+	//sortie Stockt
+	vente("vente",-1,false),
+	retourSortie("RetourFournisseur",-1,false),
+
+
+	//correction 
+	CORRECTION_VOL("VOL",-1,true),
+	CORRECTION_CASSE("CASSE",-1,true),
+	CORRECTION_PEREMPTION("peremption",-1,true),
+	CORRECTION_INVENTAIRE_PLUS("Inventaire +",1,true),
+	CORRECTION_INVENTAIRE_MOINS("Inventaire -",-1,true);
+	
+	private final int CodeMvt;
+	private final String libelle;
+	private final boolean commentareOblgatoire;
 	
 	
 	
-	private TypeMvtStock(String libelle,int code) {
+	private TypeMvtStock(String libelle,int code,boolean commentaireObl) {
 		this.CodeMvt=code;
 		this.libelle=libelle;
+		this.commentareOblgatoire=commentaireObl;
 	}
-
-
-
-	public int getCodeMvt() {
-		return CodeMvt;
-	}
-
-
-
-	public void setCodeMvt(int codeMvt) {
-		CodeMvt = codeMvt;
-	}
-
-
-
+	
 	public String getLibelle() {
 		return libelle;
 	}
-
-
-
-	public void setLibelle(String libelle) {
-		this.libelle = libelle;
+	
+	public int getSens() {
+		return CodeMvt;
 	}
 	
+	public boolean isCommentaireObligatoire() {
+		return commentareOblgatoire;
+	}
+	
+	public boolean isEntree() {
+		return CodeMvt>0;
+	}
 }

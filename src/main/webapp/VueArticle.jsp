@@ -28,6 +28,10 @@
 						<th>Désignation</th>
 						<td><c:out value="${article.designation}" /></td>
 					</tr>
+										<tr>
+						<th>Stock Actuel</th>
+						<td><c:out value="${article.stockActuel}" /></td>
+					</tr>
 					<tr>
 						<th>Prix d'achat</th>
 						<td><fmt:formatNumber value="${article.prixAchatArticle}" minFractionDigits="2" maxFractionDigits="2" /></td>

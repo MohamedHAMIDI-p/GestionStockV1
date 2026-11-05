@@ -14,6 +14,7 @@ public class ArticleDto {
 	private TvaArticle tvaArt;
 	private double prixVente;
 	private String cnufFournisseur;
+	private int stockActuel;
 	
 
 	public ArticleDto() {
@@ -113,6 +114,14 @@ public class ArticleDto {
 		this.idFournisseur = idFournisseur;
 	}
 	
+	public int getStockActuel() {
+		return stockActuel;
+	}
+
+	public void setStockActuel(int stockActuel) {
+		this.stockActuel = stockActuel;
+	}
+
 	@Override
 	public String toString() {
 		return "Article : [\r\n"

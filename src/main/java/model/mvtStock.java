@@ -9,7 +9,7 @@ public class mvtStock extends AbstractEntity
 	private int CodeMvtArticle;
 	private Article article;
 	private Fournisseur fournisseur;
-	private TypeMvtStock mvtStock;
+	private TypeMvtStock typemvtStock;
 	private Date dateMvtStock;
 	private Double QteReception;
 	private Double QteVendu;
@@ -28,13 +28,17 @@ public class mvtStock extends AbstractEntity
 		super(id, dateCreation, dateModification);
 		this.article = article;
 		this.fournisseur = fournisseur;
-		this.mvtStock = mvtStock;
+		this.typemvtStock = mvtStock;
 		this.dateMvtStock = dateMvtStock;
 		QteReception = qteReception;
 		QteVendu = qteVendu;
 		QteRetour = qteRetour;
 		QteCorrect = qteCorrect;
 		QteArticleTotal = qteArticleTotal;
+	}
+	
+	public int getVariation() {
+		return typemvtStock==null ? 0 :typemvtStock.getSens();
 	}
 	public Article getArticle() {
 		return article;
@@ -49,10 +53,10 @@ public class mvtStock extends AbstractEntity
 		this.fournisseur = fournisseur;
 	}
 	public TypeMvtStock getMvtStock() {
-		return mvtStock;
+		return typemvtStock;
 	}
-	public void setMvtStock(TypeMvtStock mvtStock) {
-		this.mvtStock = mvtStock;
+	public void setMvtStock(TypeMvtStock typemvtStock) {
+		this.typemvtStock = typemvtStock;
 	}
 	public Date getDateMvtStock() {
 		return dateMvtStock;
@@ -90,6 +94,28 @@ public class mvtStock extends AbstractEntity
 	public void setQteArticleTotal(Double qteArticleTotal) {
 		QteArticleTotal = qteArticleTotal;
 	}
+	public int getCodeMvtArticle() {
+		return CodeMvtArticle;
+	}
+	public void setCodeMvtArticle(int codeMvtArticle) {
+		CodeMvtArticle = codeMvtArticle;
+	}
+	public TypeMvtStock getTypemvtStock() {
+		return typemvtStock;
+	}
+	public void setTypemvtStock(TypeMvtStock typemvtStock) {
+		this.typemvtStock = typemvtStock;
+	}
 	
-	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "Article : [\r\n"
+				+ "           Code Mouvement Stock=" + CodeMvtArticle+",\r\n"
+				+ "           Code Article ="+ article.getCodeArticle()+",\r\n"
+				+ "           Quantite="+ QteArticleTotal+",\r\n"
+				+ "           Fournisseur ="+fournisseur.getCnuf()+",\r\n"
+				+ "           Date Mouvement ="+dateMvtStock+",\r\n"
+				+super.toString()+"]";
+	}
 }
