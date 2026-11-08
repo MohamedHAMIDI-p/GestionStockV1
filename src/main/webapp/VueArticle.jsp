@@ -75,7 +75,11 @@
 		</c:choose>
 
 		<div class="actions">
-			<a class="retour" href="${pageContext.request.contextPath}/articles">Retour à la liste</a>
+			<a class="retour" href="${pageContext.request.contextPath}/articles">Retour liste Article</a>
+			<a>
+			<c:url var="urlMouvements" value="/mouvements">
+			<c:param name="codeArticle" value="${article.codeArticle}" />
+			</c:url><a class="retour" href="${urlMouvements}">Mouvements</a></a>
 		</div>
 
 	</div>

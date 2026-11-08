@@ -2,55 +2,47 @@ package model;
 
 import java.util.Date;
 
+import exception.MotifCorrection;
 import exception.TypeMvtStock;
 
 public class mvtStock extends AbstractEntity
 {	
 	private int CodeMvtArticle;
-	private Article article;
-	private Fournisseur fournisseur;
+	private int idArticle;
+	private int idFournisseur;
 	private TypeMvtStock typemvtStock;
 	private Date dateMvtStock;
-	private Double QteReception;
-	private Double QteVendu;
-	private Double QteRetour;
-	private Double QteCorrect;
-	private Double QteArticleTotal;
+	private MotifCorrection motif; 
+	private int QteArticle;
+	private String reference;
+	private String commentaire;
 	
 	
 	public mvtStock() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	public mvtStock(int id, Date dateCreation, Date dateModification, Article article, Fournisseur fournisseur,
-			TypeMvtStock mvtStock, Date dateMvtStock, Double qteReception, Double qteVendu, Double qteRetour,
-			Double qteCorrect, Double qteArticleTotal) {
+	public mvtStock(int id, Date dateCreation, Date dateModification, int article, int fournisseur,
+			TypeMvtStock mvtStock, Date dateMvtStock, MotifCorrection motif, int Quantite) {
 		super(id, dateCreation, dateModification);
-		this.article = article;
-		this.fournisseur = fournisseur;
+		this.CodeMvtArticle=id;
+		this.idArticle = article;
+		this.idFournisseur = fournisseur;
 		this.typemvtStock = mvtStock;
 		this.dateMvtStock = dateMvtStock;
-		QteReception = qteReception;
-		QteVendu = qteVendu;
-		QteRetour = qteRetour;
-		QteCorrect = qteCorrect;
-		QteArticleTotal = qteArticleTotal;
+		this.motif=motif;
+		this.QteArticle=Quantite;
+	}
+	
+	public mvtStock(int idArticle,TypeMvtStock type,int quantite)
+	{
+		this.idArticle=idArticle;
+		this.typemvtStock=type;
+		this.QteArticle=quantite;
+		
 	}
 	
 	public int getVariation() {
 		return typemvtStock==null ? 0 :typemvtStock.getSens();
-	}
-	public Article getArticle() {
-		return article;
-	}
-	public void setArticle(Article article) {
-		this.article = article;
-	}
-	public Fournisseur getFournisseur() {
-		return fournisseur;
-	}
-	public void setFournisseur(Fournisseur fournisseur) {
-		this.fournisseur = fournisseur;
 	}
 	public TypeMvtStock getMvtStock() {
 		return typemvtStock;
@@ -64,35 +56,43 @@ public class mvtStock extends AbstractEntity
 	public void setDateMvtStock(Date dateMvtStock) {
 		this.dateMvtStock = dateMvtStock;
 	}
-	public Double getQteReception() {
-		return QteReception;
+
+	
+	public String getReference() {
+		return reference;
 	}
-	public void setQteReception(Double qteReception) {
-		QteReception = qteReception;
+	public void setReference(String reference) {
+		this.reference = reference;
 	}
-	public Double getQteVendu() {
-		return QteVendu;
+	public String getCommentaire() {
+		return commentaire;
 	}
-	public void setQteVendu(Double qteVendu) {
-		QteVendu = qteVendu;
+	public void setCommentaire(String commentaire) {
+		this.commentaire = commentaire;
 	}
-	public Double getQteRetour() {
-		return QteRetour;
+	public int getIdArticle() {
+		return idArticle;
 	}
-	public void setQteRetour(Double qteRetour) {
-		QteRetour = qteRetour;
+	public void setIdArticle(int idArticle) {
+		this.idArticle = idArticle;
 	}
-	public Double getQteCorrect() {
-		return QteCorrect;
+	public int getIdFournisseur() {
+		return idFournisseur;
 	}
-	public void setQteCorrect(Double qteCorrect) {
-		QteCorrect = qteCorrect;
+	public void setIdFournisseur(int idFournisseur) {
+		this.idFournisseur = idFournisseur;
 	}
-	public Double getQteArticleTotal() {
-		return QteArticleTotal;
+	public MotifCorrection getMotif() {
+		return motif;
 	}
-	public void setQteArticleTotal(Double qteArticleTotal) {
-		QteArticleTotal = qteArticleTotal;
+	public void setMotif(MotifCorrection motif) {
+		this.motif = motif;
+	}
+	public int getQteArticle() {
+		return QteArticle;
+	}
+	public void setQteArticle(int qteArticle) {
+		QteArticle = qteArticle;
 	}
 	public int getCodeMvtArticle() {
 		return CodeMvtArticle;
@@ -109,13 +109,7 @@ public class mvtStock extends AbstractEntity
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return "Article : [\r\n"
-				+ "           Code Mouvement Stock=" + CodeMvtArticle+",\r\n"
-				+ "           Code Article ="+ article.getCodeArticle()+",\r\n"
-				+ "           Quantite="+ QteArticleTotal+",\r\n"
-				+ "           Fournisseur ="+fournisseur.getCnuf()+",\r\n"
-				+ "           Date Mouvement ="+dateMvtStock+",\r\n"
-				+super.toString()+"]";
+		return "MvtStock [Code Mvt=" + CodeMvtArticle + ", idArticle=" + idArticle + ", type=" + typemvtStock
+				+ ", variation=" + getVariation() + ", motif=" + motif +super.toString()+"]";
 	}
 }

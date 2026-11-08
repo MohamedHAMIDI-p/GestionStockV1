@@ -48,3 +48,29 @@ ALTER TABLE fournisseur
   ADD COLUMN stockActuel INT NOT NULL DEFAULT 0;
   
   
+  
+  CREATE TABLE mouvement (
+  id             INT AUTO_INCREMENT PRIMARY KEY,
+  idArticle      INT          NOT NULL,
+  typeMouvement  VARCHAR(30)  NOT NULL,      -- RECEPTION, VENTE, RETOUR_ENTREE, RETOUR_SORTIE, CORRECTION_PLUS, CORRECTION_MOINS
+  variation      INT          NOT NULL,      -- signée : +entrée, -sortie
+  motif          VARCHAR(30)  NULL,          -- corrections seulement : VOL, CASSE, PEREMPTION...
+  idFournisseur  INT          NULL,          -- réception et retour fournisseur seulement
+  reference      VARCHAR(50)  NULL,          -- n° de bon de réception, de facture, de retour...
+  commentaire    VARCHAR(255) NULL,          -- obligatoire pour les corrections
+  dateMouvement  DATETIME     NOT NULL,
+  CONSTRAINT fk_mouvement_article     FOREIGN KEY (idArticle)     REFERENCES article(id),
+  CONSTRAINT fk_mouvement_fournisseur FOREIGN KEY (idFournisseur) REFERENCES fournisseur(id),
+  INDEX idx_mouvement_article_date (idArticle, dateMouvement)
+) ENGINE=InnoDB;
+
+--Contrôle de cohérence : doit ne renvoyer aucune ligne.
+
+
+SELECT a.id, a.codeArticle, a.stockActuel, COALESCE(SUM(m.variation), 0) AS stockCalcule
+FROM article a
+LEFT JOIN mouvement m ON m.idArticle = a.id
+GROUP BY a.id, a.codeArticle, a.stockActuel
+HAVING a.stockActuel <> COALESCE(SUM(m.variation), 0);
+  
+  

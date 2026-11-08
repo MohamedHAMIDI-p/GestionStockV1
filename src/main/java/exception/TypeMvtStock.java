@@ -45,4 +45,14 @@ public enum TypeMvtStock {
 	public boolean isEntree() {
 		return CodeMvt>0;
 	}
+
+	public boolean isCorrection() {
+		// TODO Auto-genesrated method stub
+		return false;
+	}
+
+	public boolean isFournisseurConcerne() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

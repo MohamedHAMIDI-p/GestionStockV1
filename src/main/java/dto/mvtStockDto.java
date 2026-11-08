@@ -2,6 +2,7 @@ package dto;
 
 import java.util.Date;
 
+import exception.MotifCorrection;
 import exception.TypeMvtStock;
 import model.AbstractEntity;
 import model.Article;
@@ -9,91 +10,109 @@ import model.Fournisseur;
 
 public class mvtStockDto extends AbstractEntity {
 
-	private int idmvtStock;
-	private int CodeMvtArticle;
-	private Article article;
-	private Fournisseur fournisseur;
+	private int id;
+	private String CodeArticle;
+	private String Cnuf;
+	private String nomFournisseur;
 	private TypeMvtStock typemvtStock;
 	private Date dateMvtStock;
-	private Double QteReception;
-	private Double QteVendu;
-	private Double QteRetour;
-	private Double QteCorrect;
-	private Double QteArticleTotal;
+	private int QteArticle;
+	private MotifCorrection motif;
+	private int variation;
+	private String reference;
+	private String commentaire;
 	
 	public mvtStockDto() {
 		super();
 	}
-	public int getCodeMvtArticle() {
-		return CodeMvtArticle;
+
+	public int getId() {
+		return id;
 	}
-	public void setCodeMvtArticle(int codeMvtArticle) {
-		CodeMvtArticle = codeMvtArticle;
+
+	public void setId(int id) {
+		this.id = id;
 	}
-	public Article getArticle() {
-		return article;
+
+	public String getCodeArticle() {
+		return CodeArticle;
 	}
-	public void setArticle(Article article) {
-		this.article = article;
+
+	public void setCodeArticle(String codeArticle) {
+		CodeArticle = codeArticle;
 	}
-	public Fournisseur getFournisseur() {
-		return fournisseur;
+
+	public String getCnuf() {
+		return Cnuf;
 	}
-	public void setFournisseur(Fournisseur fournisseur) {
-		this.fournisseur = fournisseur;
+
+	public void setCnuf(String cnuf) {
+		Cnuf = cnuf;
 	}
-	public TypeMvtStock getMvtStock() {
-		return typemvtStock;
+
+	public String getNomFournisseur() {
+		return nomFournisseur;
 	}
-	public void setMvtStock(TypeMvtStock typemvtStock) {
-		this.typemvtStock = typemvtStock;
+
+	public void setNomFournisseur(String nomFournisseur) {
+		this.nomFournisseur = nomFournisseur;
 	}
-	public Date getDateMvtStock() {
-		return dateMvtStock;
-	}
-	public void setDateMvtStock(Date dateMvtStock) {
-		this.dateMvtStock = dateMvtStock;
-	}
-	public Double getQteReception() {
-		return QteReception;
-	}
-	public void setQteReception(Double qteReception) {
-		QteReception = qteReception;
-	}
-	public Double getQteVendu() {
-		return QteVendu;
-	}
-	public void setQteVendu(Double qteVendu) {
-		QteVendu = qteVendu;
-	}
-	public Double getQteRetour() {
-		return QteRetour;
-	}
-	public void setQteRetour(Double qteRetour) {
-		QteRetour = qteRetour;
-	}
-	public Double getQteCorrect() {
-		return QteCorrect;
-	}
-	public void setQteCorrect(Double qteCorrect) {
-		QteCorrect = qteCorrect;
-	}
-	public Double getQteArticleTotal() {
-		return QteArticleTotal;
-	}
-	public void setQteArticleTotal(Double qteArticleTotal) {
-		QteArticleTotal = qteArticleTotal;
-	}
-	public int getIdmvtStock() {
-		return idmvtStock;
-	}
-	public void setIdmvtStock(int idmvtStock) {
-		this.idmvtStock = idmvtStock;
-	}
+
 	public TypeMvtStock getTypemvtStock() {
 		return typemvtStock;
 	}
+
 	public void setTypemvtStock(TypeMvtStock typemvtStock) {
 		this.typemvtStock = typemvtStock;
 	}
+
+	public Date getDateMvtStock() {
+		return dateMvtStock;
+	}
+
+	public void setDateMvtStock(Date dateMvtStock) {
+		this.dateMvtStock = dateMvtStock;
+	}
+
+	public int getQteArticle() {
+		return QteArticle;
+	}
+
+	public void setQteArticle(int qteArticle) {
+		QteArticle = qteArticle;
+	}
+
+	public MotifCorrection getMotif() {
+		return motif;
+	}
+
+	public void setMotif(MotifCorrection motif) {
+		this.motif = motif;
+	}
+
+	public int getVariation() {
+		return variation;
+	}
+
+	public void setVariation(int variation) {
+		this.variation = variation;
+	}
+
+	public String getReference() {
+		return reference;
+	}
+
+	public void setReference(String reference) {
+		this.reference = reference;
+	}
+
+	public String getCommentaire() {
+		return commentaire;
+	}
+
+	public void setCommentaire(String commentaire) {
+		this.commentaire = commentaire;
+	}
+	
+	
 }
