@@ -42,7 +42,7 @@ public class mvtStock extends AbstractEntity
 	}
 	
 	public int getVariation() {
-		return typemvtStock==null ? 0 :typemvtStock.getSens();
+		return typemvtStock==null ? 0 :typemvtStock.getSens()*QteArticle;
 	}
 	public TypeMvtStock getMvtStock() {
 		return typemvtStock;
