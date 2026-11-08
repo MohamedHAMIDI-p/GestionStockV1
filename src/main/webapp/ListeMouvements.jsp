@@ -18,6 +18,8 @@
 			<h1>Mouvements de stock</h1>
 			<span class="compteur">
 				<c:out value="${article.codeArticle}" /> &middot; <c:out value="${article.designation}" />
+				 &middot; <c:out value="${article.cnufFournisseur}" />
+				 &middot;<c:out value="${article.nomFournisseur}" />
 				&middot; stock actuel : <strong><c:out value="${article.stockActuel}" /></strong>
 			</span>
 		</div>

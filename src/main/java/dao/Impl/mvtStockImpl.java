@@ -16,7 +16,8 @@ import exception.TypeMvtStock;
 import model.mvtStock;
 
 public class mvtStockImpl implements mvtStockDao {
-
+	
+	
 	@Override
 	public boolean AjouterMvtStock(mvtStock mvtStock) throws SQLException {
 		String sqlStock = "UPDATE article SET stockActuel = stockActuel + ? "
@@ -49,10 +50,11 @@ public class mvtStockImpl implements mvtStockDao {
 					ps.setString(2, mvtStock.getTypemvtStock().name());
 					ps.setInt(3, variation);
 					ps.setString(4, mvtStock.getMotif() == null ? null : mvtStock.getMotif().name());
-					if (mvtStock.getIdFournisseur() == 0) {
+					Integer idFournisseur = mvtStock.getIdFournisseur();
+					if (idFournisseur== null || idFournisseur <= 0) {
 						ps.setNull(5, Types.INTEGER);
 					} else {
-						ps.setInt(5, mvtStock.getIdFournisseur());
+						ps.setInt(5, idFournisseur);
 					}
 					ps.setString(6, mvtStock.getReference());
 					ps.setString(7, mvtStock.getCommentaire());

@@ -71,7 +71,8 @@ public class MvtStockServiceImpl  implements MvtStockService{
 		if (type.isFournisseurConcerne()) {
 			fournisseur = idFournisseur;
 			if (fournisseur == null && article.getIdFournisseur() > 0) {
-				fournisseur = Integer.valueOf(article.getIdFournisseur());   // par défaut : le fournisseur de l'article
+				fournisseur = article.getIdFournisseur();
+				//fournisseur = Integer.valueOf(article.getIdFournisseur());   // par défaut : le fournisseur de l'article
 			}
 			if (fournisseur == null) {
 				throw invalide("Le fournisseur est obligatoire pour : " + type.getLibelle());

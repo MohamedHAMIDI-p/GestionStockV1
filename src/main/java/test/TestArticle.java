@@ -44,14 +44,14 @@ public class TestArticle {
 			//System.out.println(JsonUtil.toPrettyJson(f));
 			System.out.println("================================================");
 			System.out.println("===============Ajouter Article==================");
-			Article a= new Article("ART013","BLOC WC",2,3,new Date(),new Date());
+			Article a= new Article("ART014","BLOC WC",2,3,new Date(),new Date());
 			a.setPrixAchatArticle(300);
 			a.setPrixVenteArticle(200);
 			a.setPrixRevient(10);
 			a.setTvaArticle(TvaArticle.fromTaux(7));
 			a.setIdCategory(3);
 			a.setIdFournisseur(1);
-			//service.ajouterArticle(a);
+			service.ajouterArticle(a);
 			System.out.println("================================================");
 			System.out.println("=============Afficher Article====================");	
 			article = service.trouverArticle("ART013");
@@ -67,9 +67,9 @@ public class TestArticle {
 			//System.out.println(JsonUtil.toPrettyJson(lisArt));
 			System.out.println("================================================");
 			System.out.println("===================Mouvements====================");		
-			ms.enregistrerMvtStock("ART001", TypeMvtStock.reception, 100, null, null, "BR-0001", null);
-			ms.enregistrerMvtStock("ART001", TypeMvtStock.vente, 30, null, null, "FAC-0001", null);
-			ms.enregistrerMvtStock("ART001", TypeMvtStock.CORRECTION_INVENTAIRE_MOINS,20, MotifCorrection.CASSE, null, null,
+			ms.enregistrerMvtStock("ART004", TypeMvtStock.reception, 100, null, null, "BR-0001", null);
+			ms.enregistrerMvtStock("ART006", TypeMvtStock.retourEntre, 30, null, null, "FAC-0001", null);
+			ms.enregistrerMvtStock("ART013", TypeMvtStock.CORRECTION_INVENTAIRE_PLUS,20, MotifCorrection.PEREMPTION, null, null,
 					"Carton tombé au rangement");		
 			System.out.println("================================================");
 			System.out.println("================Liste Article DTO================");

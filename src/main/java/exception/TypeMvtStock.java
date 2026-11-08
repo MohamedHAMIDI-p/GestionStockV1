@@ -3,31 +3,32 @@ package exception;
 public enum TypeMvtStock {
 
 	//entre stock
-	reception("ReceptionFournisseur",1,false),
-	retourEntre("RetourClient",1,false),
+	reception("Reception Fournisseur",1,false,true),
+	retourEntre("Retour Client",1,false,false),
 	
 	//sortie Stockt
-	vente("vente",-1,false),
-	retourSortie("RetourFournisseur",-1,false),
+	vente("vente",-1,false,false),
+	retourSortie("Retour Fournisseur",-1,false,true),
 
 
 	//correction 
-	CORRECTION_VOL("VOL",-1,true),
-	CORRECTION_CASSE("CASSE",-1,true),
-	CORRECTION_PEREMPTION("peremption",-1,true),
-	CORRECTION_INVENTAIRE_PLUS("Inventaire +",1,true),
-	CORRECTION_INVENTAIRE_MOINS("Inventaire -",-1,true);
+	CORRECTION_VOL("VOL",-1,true,false),
+	CORRECTION_CASSE("CASSE",-1,true,false),
+	CORRECTION_PEREMPTION("peremption",-1,true,false),
+	CORRECTION_INVENTAIRE_PLUS("Inventaire +",1,true,false),
+	CORRECTION_INVENTAIRE_MOINS("Inventaire -",-1,true,false);
 	
 	private final int CodeMvt;
 	private final String libelle;
 	private final boolean commentareOblgatoire;
+	private final boolean fournisseurConcerne;
 	
 	
-	
-	private TypeMvtStock(String libelle,int code,boolean commentaireObl) {
+	private TypeMvtStock(String libelle,int code,boolean commentaireObl,boolean fournisseurConcerne) {
 		this.CodeMvt=code;
 		this.libelle=libelle;
 		this.commentareOblgatoire=commentaireObl;
+		this.fournisseurConcerne=fournisseurConcerne;
 	}
 	
 	public String getLibelle() {
@@ -47,12 +48,10 @@ public enum TypeMvtStock {
 	}
 
 	public boolean isCorrection() {
-		// TODO Auto-genesrated method stub
-		return false;
+		return commentareOblgatoire;
 	}
 
 	public boolean isFournisseurConcerne() {
-		// TODO Auto-generated method stub
-		return false;
+		return fournisseurConcerne;
 	}
 }

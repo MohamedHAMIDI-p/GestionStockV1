@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.ArticleDao;
 import dao.Impl.ArticleDaoImpl;
 import dao.Impl.mvtStockImpl;
+import dto.ArticleDetailDto;
 import dto.mvtStockDto;
 import exception.EntityNotFoundException;
 import exception.InvalidEntityException;
@@ -86,7 +87,7 @@ public class controleurServletMvtStock extends HttpServlet {
 		}
  
 		try {
-			Article article = articleService.trouverArticle(code.trim());
+			ArticleDetailDto article = articleService.trouverDetailArticle(code.trim());
 			List<mvtStockDto> mouvements = mvtStockService.historique(code.trim());
  
 			req.setAttribute("article", article);

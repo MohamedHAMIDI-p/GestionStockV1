@@ -9,7 +9,7 @@ public class mvtStock extends AbstractEntity
 {	
 	private int CodeMvtArticle;
 	private int idArticle;
-	private int idFournisseur;
+	private Integer idFournisseur;
 	private TypeMvtStock typemvtStock;
 	private Date dateMvtStock;
 	private MotifCorrection motif; 
@@ -21,7 +21,7 @@ public class mvtStock extends AbstractEntity
 	public mvtStock() {
 		super();
 	}
-	public mvtStock(int id, Date dateCreation, Date dateModification, int article, int fournisseur,
+	public mvtStock(int id, Date dateCreation, Date dateModification, int article, Integer fournisseur,
 			TypeMvtStock mvtStock, Date dateMvtStock, MotifCorrection motif, int Quantite) {
 		super(id, dateCreation, dateModification);
 		this.CodeMvtArticle=id;
@@ -73,13 +73,13 @@ public class mvtStock extends AbstractEntity
 	public int getIdArticle() {
 		return idArticle;
 	}
-	public void setIdArticle(int idArticle) {
+	public void setIdArticle(Integer idArticle) {
 		this.idArticle = idArticle;
 	}
-	public int getIdFournisseur() {
+	public Integer getIdFournisseur() {
 		return idFournisseur;
 	}
-	public void setIdFournisseur(int idFournisseur) {
+	public void setIdFournisseur(Integer idFournisseur) {
 		this.idFournisseur = idFournisseur;
 	}
 	public MotifCorrection getMotif() {
