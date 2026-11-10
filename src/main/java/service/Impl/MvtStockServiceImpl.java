@@ -4,14 +4,16 @@ import java.sql.SQLException;
 import java.util.List;
 
 import dao.ArticleDao;
+import dao.Impl.ArticleDaoImpl;
+import dto.ArticleDetailDto;
 import dto.mvtStockDto;
 import exception.EntityNotFoundException;
 import exception.ErreurCodes;
 import exception.InvalidEntityException;
 import exception.MotifCorrection;
 import exception.TypeMvtStock;
-import model.Article;
 import model.mvtStock;
+import service.ArticleService;
 import service.MvtStockService;
 
 public class MvtStockServiceImpl  implements MvtStockService{
@@ -21,6 +23,8 @@ public class MvtStockServiceImpl  implements MvtStockService{
  
 	private final ArticleDao articleDao;
 	private final dao.mvtStockDao mvtStockDao;
+	private  ArticleDetailDto article=new ArticleDetailDto();
+
 	
 	public MvtStockServiceImpl(ArticleDao articleDao, dao.mvtStockDao mvtStockDao) {
 		this.articleDao = articleDao;
@@ -31,7 +35,7 @@ public class MvtStockServiceImpl  implements MvtStockService{
 	public mvtStock enregistrerMvtStock(String codeArticle, TypeMvtStock type, int quantite, MotifCorrection motif,
 			Integer idFournisseur, String reference, String commentaire) throws SQLException {
  
-		// 1. Contrôles de la saisie
+		//  Contrôler la saisie
 		if (type == null) {
 			throw invalide("Le type de mouvement est obligatoire");
 		}
@@ -49,10 +53,10 @@ public class MvtStockServiceImpl  implements MvtStockService{
 			throw invalide("Le commentaire ne doit pas dépasser " + LONGUEUR_MAX_COMMENTAIRE + " caractères");
 		}
  
-		// 2. L'article existe-t-il ?
-		Article article = trouverArticle(codeArticle);
+		//  L'article existe ?
+		ArticleDetailDto article = trouverArticle(codeArticle);
  
-		// 3. Règles propres à chaque type de mouvement
+		// Règles propres à chaque type de mouvement
 		if (type.isCorrection()) {
 			if (motif == null) {
 				throw invalide("Le motif de la correction est obligatoire");
@@ -79,7 +83,7 @@ public class MvtStockServiceImpl  implements MvtStockService{
 			}
 		}
  
-		// 4. Enregistrement : le DAO refuse une sortie qui rendrait le stock négatif
+		// Enregistrement , le DAO refuse une sortie qui rendrait le stock négatif
 		mvtStock mvt = new mvtStock(article.getId(), type, quantite);
 		mvt.setMotif(motif);
 		mvt.setIdFournisseur(fournisseur);
@@ -96,17 +100,24 @@ public class MvtStockServiceImpl  implements MvtStockService{
  
 	@Override
 	public List<mvtStockDto> historique(String codeArticle) throws SQLException {
-		Article article = trouverArticle(codeArticle);
+		ArticleDetailDto article = trouverArticle(codeArticle);
 		return mvtStockDao.findHistorique(article.getCodeArticle());
 	}
  
-	// ---------- méthodes privées ----------
+	// ---------- methodes privées ----------
  
-	private Article trouverArticle(String codeArticle) throws SQLException {
+	private ArticleDetailDto trouverArticle(String codeArticle) throws SQLException {
+		/*articleDao = new ArticleDaoImpl(); */
+		ArticleService articleService=new ArticleServiceImpl(articleDao);
 		if (codeArticle == null || codeArticle.trim().isEmpty()) {
 			throw invalide("Le code article est obligatoire");
 		}
-		Article article = articleDao.FindArticlebyCodeArticle(codeArticle.trim());
+		try {
+			//article = articleDao.FindArtDetbyCodeArticle(codeArticle);
+			article=articleService.trouverDetailArticle(codeArticle);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
 		if (article == null) {
 			throw new EntityNotFoundException("Article introuvable :" + codeArticle,
 					ErreurCodes.ARTICLE_NOT_FOUND);
@@ -118,7 +129,7 @@ public class MvtStockServiceImpl  implements MvtStockService{
 		return new InvalidEntityException(message, ErreurCodes.MOUVEMENT_NOT_VALID);
 	}
  
-	/** Supprime les espaces ; une chaîne vide devient null. */
+	/** Supprime les espaces et une chaîne vide devient null. */
 	private String nettoyer(String valeur) {
 		if (valeur == null) {
 			return null;

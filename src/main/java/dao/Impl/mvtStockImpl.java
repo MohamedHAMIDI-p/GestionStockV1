@@ -82,18 +82,19 @@ public class mvtStockImpl implements mvtStockDao {
 	}
 
 	@Override
-	public List<mvtStockDto> findHistorique(String idArticle) throws SQLException {
+	public List<mvtStockDto> findHistorique(String codeArticle) throws SQLException {
 		List<mvtStockDto> liste = new ArrayList<mvtStockDto>();
-		String sql = "SELECT m.id, m.typeMouvement, m.variation, m.motif, m.reference, m.commentaire, "
+		String sql =  "SELECT m.id, m.typeMouvement, m.variation, m.motif, m.reference, m.commentaire, "
 				+ "m.dateMouvement, f.nomFournisseur "
 				+ "FROM mouvement m "
+				+ "JOIN article a ON a.id = m.idArticle "
 				+ "LEFT JOIN fournisseur f ON m.idFournisseur = f.id "
-				+ "WHERE m.idArticle = ? "
-				+ "ORDER BY m.dateMouvement DESC, m.id DESC";
+				+ "WHERE a.codeArticle = ? "
+				+ "ORDER BY m.dateMouvement asc, m.id asc";
  
 		try (Connection cn = util.utilConnexion.getConn();
 				PreparedStatement ps = cn.prepareStatement(sql)) {
-			ps.setString(1, idArticle);
+			ps.setString(1, codeArticle);
 			try (ResultSet rs = ps.executeQuery()) {
 				while (rs.next()) {
 					mvtStockDto d = new mvtStockDto();
@@ -101,9 +102,7 @@ public class mvtStockImpl implements mvtStockDao {
 					d.setTypemvtStock(TypeMvtStock.valueOf(rs.getString("typeMouvement")));
 					String motif = rs.getString("motif");
 					d.setMotif(motif == null ? null : MotifCorrection.valueOf(motif));
-					int variation = rs.getInt("variation");
-					d.setVariation(variation);
-					d.setQteArticle(Math.abs(variation));
+					d.setVariation(rs.getInt("variation"));
 					d.setNomFournisseur(rs.getString("nomFournisseur"));
 					d.setReference(rs.getString("reference"));
 					d.setCommentaire(rs.getString("commentaire"));

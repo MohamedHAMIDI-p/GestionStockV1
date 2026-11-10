@@ -5,12 +5,9 @@ import java.util.Date;
 import exception.MotifCorrection;
 import exception.TypeMvtStock;
 import model.AbstractEntity;
-import model.Article;
-import model.Fournisseur;
 
 public class mvtStockDto extends AbstractEntity {
 
-	private int id;
 	private String CodeArticle;
 	private String Cnuf;
 	private String nomFournisseur;
@@ -24,14 +21,6 @@ public class mvtStockDto extends AbstractEntity {
 	
 	public mvtStockDto() {
 		super();
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getCodeArticle() {

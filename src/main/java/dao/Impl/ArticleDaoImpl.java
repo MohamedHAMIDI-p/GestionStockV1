@@ -61,7 +61,7 @@ public class ArticleDaoImpl implements ArticleDao {
 
 		String sql="SELECT a.codeArticle, a.designation, a.prixAchatArticle, a.prixVenteArticle, "
 				+ "a.prixRevient, a.tvaArticle,a.stockActuel, a.dateCreation, a.dateModification, "
-				+ "c.nomCategory,f.cnuf, f.nomFournisseur "
+				+ "c.nomCategory,f.cnuf, f.nomFournisseur , a.idFournisseur "
 				+ "FROM article a "
 				+ "LEFT JOIN category c ON a.idCategory = c.id "
 				+ "LEFT JOIN fournisseur f ON a.idFournisseur = f.id "
@@ -86,6 +86,7 @@ public class ArticleDaoImpl implements ArticleDao {
 					a.setCnufFournisseur(rs.getString("cnuf"));
 					a.setNomFournisseur(rs.getString("nomFournisseur"));
 					a.setStockActuel(rs.getInt("stockActuel"));
+					a.setIdFournisseur(rs.getInt("idFournisseur"));
 					
 					return a;
 	

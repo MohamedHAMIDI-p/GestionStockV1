@@ -72,5 +72,40 @@ FROM article a
 LEFT JOIN mouvement m ON m.idArticle = a.id
 GROUP BY a.id, a.codeArticle, a.stockActuel
 HAVING a.stockActuel <> COALESCE(SUM(m.variation), 0);
+
+-- creation de vue pour les movement :
+
+CREATE VIEW v_mouvement AS
+SELECT m.*,
+       ABS(m.variation) AS quantite,
+       CASE WHEN m.variation > 0 THEN 'ENTREE' ELSE 'SORTIE' END AS sens
+FROM mouvement m;
+
+SELECT id, typeMouvement, quantite, sens, reference FROM v_mouvement WHERE idArticle = 14;
+
+SELECT a.codeArticle, m.typeMouvement,a.prixAchatArticle,a.prixVenteArticle,a.stockActuel,a.tvaArticle,
+f.cnuf,f.prenomFournisseur,f.nomFournisseur, m.dateMouvement
+FROM mouvement m,article a,fournisseur f
+WHERE m.idArticle = a.id and m.idFournisseur=f.id;
+
+SELECT a.codeArticle, m.typeMouvement,a.prixAchatArticle,a.prixVenteArticle,a.stockActuel,a.tvaArticle,
+f.cnuf,f.prenomFournisseur,f.nomFournisseur, m.dateMouvement
+FROM mouvement m,article a,fournisseur f
+WHERE m.idArticle = a.id and m.idFournisseur=f.id;
+
+SELECT m.id, m.typeMouvement, m.variation, m.motif, m.reference, m.commentaire, 
+m.dateMouvement, f.nomFournisseur,f.cnuf
+FROM mouvement m 
+JOIN article a ON a.id = m.idArticle 
+LEFT JOIN fournisseur f ON m.idFournisseur = f.id 
+WHERE a.codeArticle ='ART002'
+ORDER BY m.dateMouvement DESC, m.id DESC;
   
+
+SELECT m.id, m.typeMouvement, m.variation, m.motif, m.reference, m.commentaire,
+       m.dateMouvement, f.nomFournisseur
+FROM mouvement m
+LEFT JOIN fournisseur f ON m.idFournisseur = f.id
+WHERE m.idArticle = (SELECT id FROM article WHERE codeArticle = 'ART014')
+ORDER BY m.dateMouvement DESC, m.id DESC;
   

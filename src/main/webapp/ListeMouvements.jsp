@@ -13,7 +13,7 @@
 <body>
 <div class="page">
 	<div class="card">
-
+		<!-- entete de page  -->
 		<div class="card-header">
 			<h1>Mouvements de stock</h1>
 			<span class="compteur">
@@ -31,7 +31,7 @@
 			<p class="message-erreur"><c:out value="${erreur}" /></p>
 		</c:if>
 
-		<!-- ===== Saisie d'un mouvement ===== -->
+		<!-- ===== Saisie mouvement Stock ===== -->
 		<form class="formulaire" method="post" action="${pageContext.request.contextPath}/mouvements">
 			<input type="hidden" name="codeArticle" value="<c:out value="${article.codeArticle}" />">
 
@@ -76,8 +76,9 @@
 				<button type="submit" class="btn">Enregistrer le mouvement</button>
 			</div>
 		</form>
-
-		<!-- ===== Historique ===== -->
+		<!-- ===== Fin Saisie mouvement Stock ===== -->
+		
+		<!-- ===== recuperation Liste Mouvement pour l'article ===== -->
 		<c:choose>
 			<c:when test="${empty mouvements}">
 				<p>Aucun mouvement pour cet article.</p>
@@ -87,6 +88,7 @@
 					<table class="table-liste">
 						<thead>
 							<tr>
+								<th>Numero </th>
 								<th>Date</th>
 								<th>Type</th>
 								<th class="num">Quantité</th>
@@ -99,8 +101,9 @@
 						<tbody>
 							<c:forEach items="${mouvements}" var="m">
 								<tr>
+									<td class="nowrap"><c:out value="${m.id}" /></td>
 									<td class="nowrap"><fmt:formatDate value="${m.dateMvtStock}" pattern="dd/MM/yyyy HH:mm" /></td>
-									<td class="nowrap"><c:out value="${m.typeMvt.libelle}" /></td>
+									<td class="nowrap"><c:out value="${m.typemvtStock.libelle}" /></td>
 									<td class="num ${m.variation > 0 ? 'qte-plus' : 'qte-moins'}">
 										<c:if test="${m.variation > 0}">+</c:if><c:out value="${m.variation}" />
 									</td>

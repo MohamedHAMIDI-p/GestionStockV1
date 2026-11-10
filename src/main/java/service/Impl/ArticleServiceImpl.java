@@ -95,6 +95,9 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public ArticleDetailDto trouverDetailArticle(String codeArticle) throws SQLException {
 		
+		if (codeArticle==null || codeArticle.trim().isEmpty()) {
+			throw new InvalidEntityException("Code Article "+codeArticle+"Introuvable",ErreurCodes.ARTICLE_NOT_VALID);
+		}
 		ArticleDetailDto a =articleDao.FindArtDetbyCodeArticle(codeArticle);
 		
 		if (a==null) {

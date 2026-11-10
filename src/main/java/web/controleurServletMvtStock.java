@@ -18,7 +18,6 @@ import dto.ArticleDetailDto;
 import dto.mvtStockDto;
 import exception.EntityNotFoundException;
 import exception.InvalidEntityException;
-import model.Article;
 import exception.MotifCorrection;
 import exception.TypeMvtStock;
 import service.ArticleService;
@@ -112,7 +111,7 @@ public class controleurServletMvtStock extends HttpServlet {
 		}
 	}
  
-	// ---------- lecture des paramètres (une valeur invalide donne null ou 0, le service la refuse) ----------
+	// ---------- lecture des paramètres (une valeur invalide donne null ou 0, le service refuse) ----------
  
 	private TypeMvtStock lireType(String valeur) {
 		if (valeur == null || valeur.trim().isEmpty()) {

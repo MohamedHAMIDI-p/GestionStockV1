@@ -63,10 +63,6 @@
 						<th>Date création</th>
 						<td><fmt:formatDate value="${article.dateCreation}" pattern="dd/MM/yyyy HH:mm" /></td>
 					</tr>
-					<tr>
-						<th>Date modification</th>
-						<td><fmt:formatDate value="${article.dateModification}" pattern="dd/MM/yyyy HH:mm" /></td>
-					</tr>
 				</table>
 			</c:when>
 			<c:otherwise>
