@@ -18,6 +18,7 @@ import exception.TvaArticle;
 import exception.TypeMvtStock;
 import model.Article;
 import model.Fournisseur;
+import model.mvtStock;
 import service.ArticleService;
 import service.FournisseurService;
 import service.MvtStockService;
@@ -72,7 +73,7 @@ public class TestArticle {
 			System.out.println("===================Mouvements====================");
 			 article =service.trouverDetailArticle("ART002");
 			 System.out.println(JsonUtil.toPrettyJson(article));
-			ms.enregistrerMvtStock("ART002", TypeMvtStock.reception, 100, null, null, "BR-0002", null);
+			ms.enregistrerMvtStock("ART002", TypeMvtStock.reception, 10, null, null, "BR-0002", null);
 			ms.enregistrerMvtStock("ART002", TypeMvtStock.retourEntre, 30, null, null, "FAC-0002", null);
 			ms.enregistrerMvtStock("ART002", TypeMvtStock.CORRECTION_INVENTAIRE_PLUS,20, MotifCorrection.PEREMPTION, null, null,
 					"Ajuster le stock");

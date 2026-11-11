@@ -5,7 +5,7 @@ import model.AbstractEntity;
 
 public class ArticleDetailDto extends AbstractEntity {
 	
-	private int idArticle;
+	//private int idArticle;
 	private String codeArticle;
 	private String designation;
 	private int idCategory;
@@ -26,14 +26,14 @@ public class ArticleDetailDto extends AbstractEntity {
 	}
 
 
-	public int getIdArticle() {
+/*	public int getIdArticle() {
 		return idArticle;
 	}
 
 
 	public void setIdArticle(int idArticle) {
 		this.idArticle = idArticle;
-	}
+	}*/
 
 
 	public String getCodeArticle() {

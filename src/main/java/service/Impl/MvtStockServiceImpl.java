@@ -12,6 +12,7 @@ import exception.ErreurCodes;
 import exception.InvalidEntityException;
 import exception.MotifCorrection;
 import exception.TypeMvtStock;
+import model.Article;
 import model.mvtStock;
 import service.ArticleService;
 import service.MvtStockService;
@@ -54,14 +55,20 @@ public class MvtStockServiceImpl  implements MvtStockService{
 		}
  
 		//  L'article existe ?
-		ArticleDetailDto article = trouverArticle(codeArticle);
+		ArticleService articleService=new ArticleServiceImpl(articleDao);
+		Article article = articleService.trouverArticle(codeArticle);
+		
+		if (article == null) {
+			throw new EntityNotFoundException("Article introuvable :" + codeArticle,
+					ErreurCodes.ARTICLE_NOT_FOUND);
+		}
  
 		// Règles propres à chaque type de mouvement
 		if (type.isCorrection()) {
 			if (motif == null) {
 				throw invalide("Le motif de la correction est obligatoire");
 			}
-			if (!motif.estCompatible(type)) {
+			if (motif.estCompatible(type)) {
 				throw invalide("Le motif « " + motif.getLibelle() + " » ne convient pas à : " + type.getLibelle());
 			}
 			if (com == null) {
