@@ -11,6 +11,6 @@ import model.mvtStock;
 public interface MvtStockService {
 
 	mvtStock enregistrerMvtStock(String codeArticle, TypeMvtStock type, int quantite, MotifCorrection motif,
-			Integer idFournisseur, String reference, String commentaire) throws SQLException;
+	Integer idFournisseur, String reference, String commentaire) throws SQLException;
 	List<mvtStockDto> historique(String codeArticle) throws SQLException;
 }

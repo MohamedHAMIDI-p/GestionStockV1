@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import dao.ArticleDao;
+import dao.ClientDao;
 import dao.Impl.ArticleDaoImpl;
 import dto.ArticleDetailDto;
 import dto.mvtStockDto;
@@ -25,6 +26,7 @@ public class MvtStockServiceImpl  implements MvtStockService{
 	private final ArticleDao articleDao;
 	private final dao.mvtStockDao mvtStockDao;
 	private  ArticleDetailDto article=new ArticleDetailDto();
+
 
 	
 	public MvtStockServiceImpl(ArticleDao articleDao, dao.mvtStockDao mvtStockDao) {
@@ -63,7 +65,8 @@ public class MvtStockServiceImpl  implements MvtStockService{
 					ErreurCodes.ARTICLE_NOT_FOUND);
 		}
  
-		// Règles propres à chaque type de mouvement
+		// Regles propres à chaque type de mouvement
+		
 		if (type.isCorrection()) {
 			if (motif == null) {
 				throw invalide("Le motif de la correction est obligatoire");
@@ -109,8 +112,7 @@ public class MvtStockServiceImpl  implements MvtStockService{
 	public List<mvtStockDto> historique(String codeArticle) throws SQLException {
 		ArticleDetailDto article = trouverArticle(codeArticle);
 		return mvtStockDao.findHistorique(article.getCodeArticle());
-	}
- 
+	}	
 	// ---------- methodes privées ----------
  
 	private ArticleDetailDto trouverArticle(String codeArticle) throws SQLException {
@@ -144,4 +146,5 @@ public class MvtStockServiceImpl  implements MvtStockService{
 		String v = valeur.trim();
 		return v.isEmpty() ? null : v;
 	}
+
 }

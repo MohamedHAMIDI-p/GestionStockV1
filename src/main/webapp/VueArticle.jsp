@@ -76,6 +76,10 @@
 			<c:url var="urlMouvements" value="/mouvements">
 			<c:param name="codeArticle" value="${article.codeArticle}" />
 			</c:url><a class="retour" href="${urlMouvements}">Mouvements</a></a>
+			<a>
+			<c:url var="urlMouvements" value="/mouvements">
+			<c:param name="codeArticle" value="${article.codeArticle}" />
+			</c:url><a class="retour" href="${urlMouvements}">Commandes</a></a>
 		</div>
 
 	</div>

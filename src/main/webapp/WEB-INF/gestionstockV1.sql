@@ -108,4 +108,39 @@ FROM mouvement m
 LEFT JOIN fournisseur f ON m.idFournisseur = f.id
 WHERE m.idArticle = (SELECT id FROM article WHERE codeArticle = 'ART014')
 ORDER BY m.dateMouvement DESC, m.id DESC;
+
+-- Table des clients
+  CREATE TABLE client (
+  id              INT AUTO_INCREMENT PRIMARY KEY,
+  codeClient      VARCHAR(20)  NOT NULL UNIQUE,
+  nomClient       VARCHAR(100) NOT NULL,
+  prenomClient    VARCHAR(100) NOT NULL,
+  telephoneClient VARCHAR(30)  NULL,
+  AdresseClient VARCHAR(30)  NULL,
+  dateCreation    DATETIME     NOT NULL
+) ENGINE=InnoDB;
+
+
+INSERT INTO client (codeClient, nomClient, prenomClient, dateCreation)
+VALUES ('COMPTOIR', 'Client comptoir','Client comptoir', NOW());
+
+INSERT INTO client (codeClient, nomClient, prenomClient, telephoneClient, dateCreation) VALUES
+  ('C001', 'HAMIDI','HAMZA', '0500000011', NOW()),
+  ('C002', 'HAMIDI','ABDELHADI', '0500000012', NOW()),
+  ('C003', 'HAMIDI','MOHAMED', '0500000012', NOW());
   
+  
+  ALTER TABLE mouvement
+  ADD COLUMN idClient INT NULL,
+  ADD CONSTRAINT fk_mouvement_client FOREIGN KEY (idClient) REFERENCES client(id);
+  
+  
+  
+  ALTER TABLE mouvement
+  ADD COLUMN idClient INT NULL,
+  ADD CONSTRAINT fk_mouvement_client FOREIGN KEY (idClient) REFERENCES client(id);
+  
+  UPDATE mouvement
+  SET idClient = (SELECT id FROM client WHERE codeClient = 'COMPTOIR')
+  WHERE typeMouvement IN ('VENTE', 'RETOUR_ENTREE', 'vente', 'retourEntre');
+

@@ -66,6 +66,13 @@
 				<input id="reference" type="text" name="reference" maxlength="50"
 					value="<c:out value="${param.reference}" />">
 			</div>
+			
+			<div>
+				<label for="client">Client (Numro Client)</label>
+				<input id="numroclient" type="text" name="client" maxlength="100"
+					value="<c:out value="${param.reference}" />">
+			</div>
+			
 
 			<div class="large">
 				<label for="commentaire">Commentaire (obligatoire pour une correction)</label>

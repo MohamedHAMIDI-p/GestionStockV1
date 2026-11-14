@@ -6,8 +6,7 @@ public enum MotifCorrection {
 	CASSE("Casse", false, true),
 	PEREMPTION("Péremption", false, true),
 	RETROUVE("Article retrouvé", true, false),
-	ERREUR_INVENTAIRE("Erreur d'inventaire", true, true),
-	AUTRE("Autre", true, true);
+	ERREUR_INVENTAIRE("CORRECTION APRES INVENTAIRE", true, true);
  
 	private final String libelle;
 	private final boolean correctionPlus;
