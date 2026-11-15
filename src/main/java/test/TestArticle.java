@@ -50,6 +50,7 @@ public class TestArticle {
 		ArticleDetailDto article;
 		try {
 			System.out.println("===============Ajouter Client==================");
+			
 			ClientDto clientDto=new ClientDto("C008","HAMIDI","ACHRAF");
 			//secrviceClient.ajouterClient(clientDto);
 			ClientDto C1=secrviceClient.findByIdClientSer(9);
