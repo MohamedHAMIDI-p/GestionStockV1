@@ -48,6 +48,18 @@ public class ClientDaoImpl implements ClientDao {
 	}
 
 	@Override
+	public client findByIdClient(int idClient) throws SQLException {
+		String sql="select * from client where id = ?";
+		try(Connection cn=utilConnexion.getConn();
+				PreparedStatement ps=cn.prepareStatement(sql)){
+			ps.setInt(1, idClient);
+			try(ResultSet rs=ps.executeQuery()){
+				return rs.next() ? mapClient(rs) : null;
+			}
+		}
+	}
+	
+	@Override
 	public List<client> findAllClient() throws SQLException {
 		return null;
 	}
@@ -64,4 +76,5 @@ public class ClientDaoImpl implements ClientDao {
 		
 		return nouveauC;
 	}
+
 }

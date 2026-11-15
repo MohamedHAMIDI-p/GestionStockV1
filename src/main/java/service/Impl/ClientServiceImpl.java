@@ -1,9 +1,11 @@
 package service.Impl;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import dao.ClientDao;
 import dto.ClientDto;
+import exception.EntityNotFoundException;
 import exception.ErreurCodes;
 import exception.InvalidEntityException;
 import model.client;
@@ -41,4 +43,32 @@ public class ClientServiceImpl implements ClientService {
 		
 	}
 
+	@Override
+	public ClientDto findByCodeClientSer(String codeClient) throws SQLException {
+
+		ClientDto clientDto=ClientDto.fromEntity(clientDao.findByCodeClient(codeClient));
+		if(clientDto.getCodeClient().trim()==null || clientDto.getCodeClient().trim().isEmpty()) {
+			throw new EntityNotFoundException("le code n'existe pas ", ErreurCodes.CLIENT_NOT_VALID);
+		}
+		return clientDto;
+	}
+
+	@Override
+	public ClientDto findByIdClientSer(int idClient) throws SQLException {
+		
+		ClientDto clientDto=ClientDto.fromEntity(clientDao.findByIdClient(idClient));
+		
+		if(clientDto.getCodeClient().trim()==null || clientDto.getCodeClient().trim().isEmpty()) {
+			throw new EntityNotFoundException("le code n'existe pas ", ErreurCodes.CLIENT_NOT_VALID);
+		}
+		return clientDto;
+	}
+
+	@Override
+	public List<ClientDto> findListClientALL() throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 }

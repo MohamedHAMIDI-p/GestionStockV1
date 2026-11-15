@@ -51,8 +51,8 @@ public class TestArticle {
 		try {
 			System.out.println("===============Ajouter Client==================");
 			ClientDto clientDto=new ClientDto("C008","HAMIDI","ACHRAF");
-			secrviceClient.ajouterClient(clientDto);
-			client C1=clientDao.findByCodeClient("C001");
+			//secrviceClient.ajouterClient(clientDto);
+			ClientDto C1=secrviceClient.findByIdClientSer(9);
 			System.out.println(JsonUtil.toPrettyJson(C1));
 			System.out.println("================================================");
 			System.out.println("===============Ajouter Fournisseur==================");

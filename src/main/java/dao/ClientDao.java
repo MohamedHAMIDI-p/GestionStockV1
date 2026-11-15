@@ -7,8 +7,9 @@ import model.client;
 
 public interface ClientDao {
 	
-	public boolean ajouterClient(client cl) throws SQLException;
-	public client findByCodeClient(String CodeClient) throws SQLException;
-	public List<client> findAllClient() throws SQLException;
+	 boolean ajouterClient(client cl) throws SQLException;
+	 client findByCodeClient(String CodeClient) throws SQLException;
+	 client findByIdClient(int idClient) throws SQLException;
+	 List<client> findAllClient() throws SQLException;
 
 }

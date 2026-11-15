@@ -9,13 +9,13 @@ import model.Article;
 
 public interface ArticleService {
 	
-	public void ajouterArticle(Article a) throws SQLException;
-	public Article trouverArticle(String codeArticle) throws SQLException;
-	public List<Article> findListArticle() throws SQLException;
-	public List<ArticleDto> findListArticleDto() throws SQLException;
-	public void modifierArticle(Article a);
-	public void supprimerArticle(Article a);
-	public ArticleDetailDto trouverDetailArticle(String codeArticle)throws SQLException;
+	 void ajouterArticle(Article a) throws SQLException;
+	 Article trouverArticle(String codeArticle) throws SQLException;
+	 List<Article> findListArticle() throws SQLException;
+	 List<ArticleDto> findListArticleDto() throws SQLException;
+	 void modifierArticle(Article a);
+	 void supprimerArticle(Article a);
+	 ArticleDetailDto trouverDetailArticle(String codeArticle)throws SQLException;
 	
 	
 
