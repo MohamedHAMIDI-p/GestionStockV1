@@ -21,6 +21,7 @@ public class ClientsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     private ClientDao clientDao;
+    
 
     @Override
     public void init() throws ServletException {

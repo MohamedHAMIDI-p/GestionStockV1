@@ -296,7 +296,6 @@
 				})
 				.catch(function () {
 					console.error('Erreur création client :', erreur);
-
 				    var zone = document.getElementById('erreurClient');
 				    zone.textContent = erreur.message;
 				    zone.hidden = false;
