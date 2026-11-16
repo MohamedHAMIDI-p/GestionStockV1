@@ -16,23 +16,24 @@ public class ClientDaoImpl implements ClientDao {
 	@Override
 	public boolean ajouterClient(client cl) throws SQLException {
 
-		int ligne=0;
 		String sql="INSERT INTO client (codeClient,nomClient,prenomClient,telephoneClient,AdresseClient,dateCreation) "
 				+ " VALUES (?,?,?,?,?,NOW())";
-		Connection cn=util.utilConnexion.getConn();
-		PreparedStatement ps=cn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-		ps.setString(1, cl.getCodeClient());
-		ps.setString(2, cl.getNomClient());
-		ps.setString(3, cl.getPrenomClient());
-		ps.setString(4, cl.getTelephoneClient());
-		ps.setString(5, cl.getAdresseClient());
-		ligne=ps.executeUpdate();
-		ResultSet keys=ps.getGeneratedKeys();
-		if(keys.next()) {
-			cl.setId(keys.getInt(1));
+		try (Connection cn=util.utilConnexion.getConn();
+		PreparedStatement ps=cn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS)){
+			ps.setString(1, cl.getCodeClient());
+			ps.setString(2, cl.getNomClient());
+			ps.setString(3, cl.getPrenomClient());
+			ps.setString(4, cl.getTelephoneClient());
+			ps.setString(5, cl.getAdresseClient());
+			int ligne=ps.executeUpdate();
+			try (ResultSet keys=ps.getGeneratedKeys()){
+				if(keys.next()) {
+					cl.setId(keys.getInt(1));
+				}
+			}
+			return ligne>0;
 		}
 		
-		return ligne>0;
 	}
 
 	@Override

@@ -3,19 +3,19 @@ package exception;
 public enum TypeMvtStock {
 
 	//entre stock
-	reception("Reception Fournisseur",1,false,true),
-	retourEntre("Retour Client",1,false,true),
+	reception("Reception Fournisseur",1,false,true,false),
+	retourEntre("Retour Client",1,false,true,true),
 	
 	//sortie Stockt
-	retourSortie("Retour Fournisseur",-1,false,true),
-	vente("vente",-1,false,true),
+	retourSortie("Retour Fournisseur",-1,false,true,false),
+	vente("vente",-1,false,true,true),
 	
 
 
 	//correction 
-	CORRECTION("CORRECTION",-1,true,false),
-	CORRECTION_INVENTAIRE_PLUS("CORRECTION Inventaire +",1,true,false),
-	CORRECTION_INVENTAIRE_MOINS("CORRECTION Inventaire -",-1,true,false);
+	CORRECTION("CORRECTION",-1,true,false,false),
+	CORRECTION_INVENTAIRE_PLUS("CORRECTION Inventaire +",1,true,false,false),
+	CORRECTION_INVENTAIRE_MOINS("CORRECTION Inventaire -",-1,true,false,false);
 	
 	/*CORRECTION_VOL("VOL",-1,true,false),
 	CORRECTION_CASSE("CASSE",-1,true,false),
@@ -27,13 +27,18 @@ public enum TypeMvtStock {
 	private final String libelle;
 	private final boolean commentareOblgatoire;
 	private final boolean fournisseurConcerne;
+	private final boolean clientConcerne;
 	
-	
-	private TypeMvtStock(String libelle,int code,boolean commentaireObl,boolean fournisseurConcerne) {
-		this.CodeMvt=code;
-		this.libelle=libelle;
-		this.commentareOblgatoire=commentaireObl;
-		this.fournisseurConcerne=fournisseurConcerne;
+	private TypeMvtStock(String libelle, int code,
+	        boolean commentaireObl,
+	        boolean fournisseurConcerne,
+	        boolean clientConcerne) {
+
+	    this.CodeMvt = code;
+	    this.libelle = libelle;
+	    this.commentareOblgatoire = commentaireObl;
+	    this.fournisseurConcerne = fournisseurConcerne;
+	    this.clientConcerne = clientConcerne;
 	}
 	
 	public String getLibelle() {
@@ -58,5 +63,9 @@ public enum TypeMvtStock {
 
 	public boolean isFournisseurConcerne() {
 		return fournisseurConcerne;
+	}
+	
+	public boolean isClientConcerne() {
+	    return clientConcerne;
 	}
 }

@@ -39,11 +39,11 @@ public class TestArticle {
 	public static void main(String[] args) throws Exception {
 		
 		ArticleDao dao = new ArticleDaoImpl();
-		MvtStockService ms = new MvtStockServiceImpl(dao, new mvtStockImpl());
+		ClientDao clientDao= new ClientDaoImpl();
+		MvtStockService ms = new MvtStockServiceImpl(dao, new mvtStockImpl(),clientDao);
 		FournisseurDao daoFour= new FournisseurDaoImpl();
 		FournisseurService serviceFour=new FournisseurServiceImpl(daoFour);
 		ArticleService service=new ArticleServiceImpl(dao);
-		ClientDao clientDao= new ClientDaoImpl();
 		ClientService secrviceClient=new ClientServiceImpl(clientDao);
 		List<Article> lisArt=service.findListArticle();
 		List<ArticleDto> listArtDto=service.findListArticleDto();
@@ -51,9 +51,9 @@ public class TestArticle {
 		try {
 			System.out.println("===============Ajouter Client==================");
 			
-			ClientDto clientDto=new ClientDto("C008","HAMIDI","ACHRAF");
+			//ClientDto clientDto=new ClientDto("C008","HAMIDI","ACHRAF");
 			//secrviceClient.ajouterClient(clientDto);
-			ClientDto C1=secrviceClient.findByIdClientSer(9);
+			ClientDto C1=secrviceClient.findByCodeClientSer("C002");
 			System.out.println(JsonUtil.toPrettyJson(C1));
 			System.out.println("================================================");
 			System.out.println("===============Ajouter Fournisseur==================");

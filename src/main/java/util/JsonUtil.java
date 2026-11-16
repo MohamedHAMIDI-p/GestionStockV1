@@ -43,6 +43,10 @@ public final class JsonUtil {
 		resp.getWriter().write(json);
 	}
 	
+	public static <T> T fromJson(String json, Class<T> classe) {
+	    return GSON.fromJson(json, classe);
+	}
+	
 	public static String erreurJson(String message,String codeErreur) {
 		Map<String, Object> erreur= new LinkedHashMap<String, Object>();
 		erreur.put("erreur", message);

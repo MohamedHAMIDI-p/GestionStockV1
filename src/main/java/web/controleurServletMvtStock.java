@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
  
 import dao.ArticleDao;
+import dao.ClientDao;
 import dao.Impl.ArticleDaoImpl;
+import dao.Impl.ClientDaoImpl;
 import dao.Impl.mvtStockImpl;
 import dto.ArticleDetailDto;
 import dto.mvtStockDto;
@@ -37,8 +39,9 @@ public class controleurServletMvtStock extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		ArticleDao articleDao = new ArticleDaoImpl();
+		ClientDao clientDao=new ClientDaoImpl();
 		articleService = new ArticleServiceImpl(articleDao);
-		mvtStockService = new MvtStockServiceImpl(articleDao, new mvtStockImpl());
+		mvtStockService = new MvtStockServiceImpl(articleDao, new mvtStockImpl(),clientDao);
 	}
  
 	@Override
@@ -58,6 +61,7 @@ public class controleurServletMvtStock extends HttpServlet {
 					lireEntier(req.getParameter("quantite")),
 					lireMotif(req.getParameter("motif")),
 					null,                                         // fournisseur : celui de l'article par défaut
+					req.getParameter("codeClient"),
 					req.getParameter("reference"),
 					req.getParameter("commentaire"));
  

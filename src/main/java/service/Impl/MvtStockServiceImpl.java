@@ -5,7 +5,6 @@ import java.util.List;
 
 import dao.ArticleDao;
 import dao.ClientDao;
-import dao.Impl.ArticleDaoImpl;
 import dto.ArticleDetailDto;
 import dto.mvtStockDto;
 import exception.EntityNotFoundException;
@@ -14,6 +13,7 @@ import exception.InvalidEntityException;
 import exception.MotifCorrection;
 import exception.TypeMvtStock;
 import model.Article;
+import model.client;
 import model.mvtStock;
 import service.ArticleService;
 import service.MvtStockService;
@@ -25,18 +25,22 @@ public class MvtStockServiceImpl  implements MvtStockService{
  
 	private final ArticleDao articleDao;
 	private final dao.mvtStockDao mvtStockDao;
-	private  ArticleDetailDto article=new ArticleDetailDto();
+	private final ClientDao clientDao;
+	private  Article article;
+	private  ArticleDetailDto articleDto=new ArticleDetailDto();
+
 
 
 	
-	public MvtStockServiceImpl(ArticleDao articleDao, dao.mvtStockDao mvtStockDao) {
+	public MvtStockServiceImpl(ArticleDao articleDao, dao.mvtStockDao mvtStockDao,ClientDao clientDao) {
 		this.articleDao = articleDao;
 		this.mvtStockDao = mvtStockDao;
+		this.clientDao=clientDao;
 	}
 	
 	@Override
 	public mvtStock enregistrerMvtStock(String codeArticle, TypeMvtStock type, int quantite, MotifCorrection motif,
-			Integer idFournisseur, String reference, String commentaire) throws SQLException {
+			Integer idFournisseur,String codeClient, String reference, String commentaire) throws SQLException {
  
 		//  Contrôler la saisie
 		if (type == null) {
@@ -58,7 +62,11 @@ public class MvtStockServiceImpl  implements MvtStockService{
  
 		//  L'article existe ?
 		ArticleService articleService=new ArticleServiceImpl(articleDao);
-		Article article = articleService.trouverArticle(codeArticle);
+		try {
+			 article = articleService.trouverArticle(codeArticle);			
+		}catch(SQLException e) {
+			System.out.println(e.getMessage());
+		}
 		
 		if (article == null) {
 			throw new EntityNotFoundException("Article introuvable :" + codeArticle,
@@ -92,11 +100,26 @@ public class MvtStockServiceImpl  implements MvtStockService{
 				throw invalide("Le fournisseur est obligatoire pour : " + type.getLibelle());
 			}
 		}
+		
+		Integer idClient=null;
+		if(type.isClientConcerne()) {
+			String code=nettoyer(codeClient);
+			if(code ==null) {
+				throw invalide("le Code Client est obligatoire pour : "+ type.getLibelle());
+			}
+			
+			client cl=clientDao.findByCodeClient(code);
+			if(cl==null) {
+				throw invalide("Client introuvable "+code);
+			}
+			idClient=cl.getId();
+		}
  
 		// Enregistrement , le DAO refuse une sortie qui rendrait le stock négatif
 		mvtStock mvt = new mvtStock(article.getId(), type, quantite);
 		mvt.setMotif(motif);
 		mvt.setIdFournisseur(fournisseur);
+		mvt.setIdClient(idClient);
 		mvt.setReference(ref);
 		mvt.setCommentaire(com);
  
@@ -116,22 +139,19 @@ public class MvtStockServiceImpl  implements MvtStockService{
 	// ---------- methodes privées ----------
  
 	private ArticleDetailDto trouverArticle(String codeArticle) throws SQLException {
-		/*articleDao = new ArticleDaoImpl(); */
+
 		ArticleService articleService=new ArticleServiceImpl(articleDao);
+		
 		if (codeArticle == null || codeArticle.trim().isEmpty()) {
 			throw invalide("Le code article est obligatoire");
 		}
-		try {
-			//article = articleDao.FindArtDetbyCodeArticle(codeArticle);
-			article=articleService.trouverDetailArticle(codeArticle);
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-		if (article == null) {
+			articleDto=articleService.trouverDetailArticle(codeArticle);
+		
+		if (articleDto == null) {
 			throw new EntityNotFoundException("Article introuvable :" + codeArticle,
 					ErreurCodes.ARTICLE_NOT_FOUND);
 		}
-		return article;
+		return articleDto;
 	}
  
 	private InvalidEntityException invalide(String message) {

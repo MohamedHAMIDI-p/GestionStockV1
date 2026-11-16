@@ -14,8 +14,6 @@ import dao.Impl.ArticleDaoImpl;
 import dto.ArticleDetailDto;
 import dto.ArticleDto;
 import exception.EntityNotFoundException;
-import exception.ErreurCodes;
-import model.Article;
 import service.ArticleService;
 import service.Impl.ArticleServiceImpl;
 import util.JsonUtil;

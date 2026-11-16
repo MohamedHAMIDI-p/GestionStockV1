@@ -24,8 +24,8 @@ public class mvtStockImpl implements mvtStockDao {
 				+ "WHERE id = ? AND stockActuel + ? >= 0";
  
 		String sqlMvt = "INSERT INTO mouvement "
-				+ "(idArticle, typeMouvement, variation, motif, idFournisseur, reference, commentaire, dateMouvement) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, NOW())";
+				+ "(idArticle, typeMouvement, variation, motif, idFournisseur,idClient, reference, commentaire, dateMouvement) "
+				+ "VALUES (?,?, ?, ?, ?, ?, ?, ?, NOW())";
  
 		int variation = mvtStock.getVariation();
  
@@ -56,8 +56,14 @@ public class mvtStockImpl implements mvtStockDao {
 					} else {
 						ps.setInt(5, idFournisseur);
 					}
-					ps.setString(6, mvtStock.getReference());
-					ps.setString(7, mvtStock.getCommentaire());
+					Integer idClient=mvtStock.getIdClient();
+					if(idClient==null || idClient<=0) {
+						ps.setNull(6, Types.INTEGER);
+					}else {
+						ps.setInt(6, idClient);
+					}
+					ps.setString(7, mvtStock.getReference());
+					ps.setString(8, mvtStock.getCommentaire());
 					ps.executeUpdate();
 					try (ResultSet keys = ps.getGeneratedKeys()) {
 						if (keys.next()) {

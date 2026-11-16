@@ -10,6 +10,7 @@ public class mvtStock extends AbstractEntity
 	private int CodeMvtArticle;
 	private int idArticle;
 	private Integer idFournisseur;
+	private Integer idClient;
 	private TypeMvtStock typemvtStock;
 	private Date dateMvtStock;
 	private MotifCorrection motif; 
@@ -107,6 +108,15 @@ public class mvtStock extends AbstractEntity
 		this.typemvtStock = typemvtStock;
 	}
 	
+	public Integer getIdClient() {
+		return idClient;
+	}
+	public void setIdClient(Integer idClient) {
+		this.idClient = idClient;
+	}
+	public void setIdArticle(int idArticle) {
+		this.idArticle = idArticle;
+	}
 	@Override
 	public String toString() {
 		return "MvtStock [Code Mvt=" + CodeMvtArticle + ", idArticle=" + idArticle + ", type=" + typemvtStock
