@@ -275,7 +275,14 @@
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
 				body: new URLSearchParams(new FormData(formClient)).toString()
 			})
-				.then(function (reponse) { return reponse.json(); })
+				.then(function (reponse) { 
+					 return reponse.json().then(function (data) {
+					        if (!reponse.ok) {
+					            throw new Error(data.erreur || data.message || 'Erreur serveur');
+					        }
+					        return data;
+					    });
+				})
 				.then(function (rep) {
 					if (rep.ok) {
 						codeClient.value = document.getElementById('nc_code').value.trim();
@@ -287,7 +294,13 @@
 						zone.hidden = false;
 					}
 				})
-				.catch(function () { alert('La création du client a échoué. Réessayez.'); });
+				.catch(function () {
+					console.error('Erreur création client :', erreur);
+
+				    var zone = document.getElementById('erreurClient');
+				    zone.textContent = erreur.message;
+				    zone.hidden = false;
+					});
 		}
 
 		// 4. Branchement
