@@ -20,7 +20,7 @@
     <aside class="sidebar" id="sidebar">
 
         <div class="brand">
-            <div class="brand-icon">G</div>
+            <div class="brand-icon">HA</div>
             <div>
                 <h2>GestionStock</h2>
                 <span>Gestion commerciale</span>
@@ -114,7 +114,7 @@
         </nav>
 
         <div class="sidebar-footer">
-            <div class="user-avatar">A</div>
+            <div class="user-avatar">HA</div>
             <div>
                 <strong>Administrateur</strong>
                 <span>Gestionnaire</span>
@@ -139,7 +139,7 @@
             <div class="topbar-right">
                 <span class="today" id="currentDate"></span>
                 <div class="notification">♧</div>
-                <div class="profile-avatar">A</div>
+                <div class="profile-avatar">HA</div>
             </div>
 
         </header>

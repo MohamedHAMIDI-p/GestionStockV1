@@ -232,6 +232,6 @@
     </main>
 
 </div>
-
+<script src="${pageContext.request.contextPath}/js/accueil.js"></script>
 </body>
 </html>
