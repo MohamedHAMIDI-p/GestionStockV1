@@ -8,6 +8,7 @@ import model.AbstractEntity;
 
 public class mvtStockDto extends AbstractEntity {
 
+	private static final long serialVersionUID = 1L;
 	private String CodeArticle;
 	private String Cnuf;
 	private String nomFournisseur;

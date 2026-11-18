@@ -1,0 +1,174 @@
+
+/* ==================================================
+   EN-TETE DE LA LISTE
+================================================== */
+
+.compteur {
+    color: #64748b;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+/* ==================================================
+   TABLEAU DES ARTICLES
+================================================== */
+
+.table-liste {
+    width: 100%;
+    min-width: 750px;
+}
+
+.table-liste th {
+    color: #78859a;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.table-liste td {
+    font-size: 12px;
+    color: #4d5b70;
+}
+
+.table-liste tbody tr:hover {
+    background: #f1f7ff;
+}
+
+.table-liste .num {
+    text-align: right;
+}
+
+/* ==================================================
+   BOUTON DETAILS
+================================================== */
+
+.btn-detail {
+    display: inline-block;
+    padding: 7px 12px;
+    background: #3978e8;
+    color: white;
+    border-radius: 6px;
+    font-size: 12px;
+    transition: background 0.2s;
+}
+
+.btn-detail:hover {
+    background: #2864c8;
+}
+
+/* ==================================================
+   PAGINATION
+================================================== */
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 22px;
+}
+
+.pagination a,
+.pagination span {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+.pagination a {
+    background: #f1f5f9;
+    color: #263247;
+}
+
+.pagination a:hover {
+    background: #e2eaf5;
+    color: #2864c8;
+}
+
+.pagination .actif {
+    background: #3978e8;
+    color: white;
+}
+
+.pagination .desactive {
+    color: #a0a8b5;
+    background: #f5f6f8;
+}
+
+/* ==================================================
+   RESPONSIVE ARTICLES
+================================================== */
+
+@media (max-width: 750px) {
+
+    .panel {
+        padding: 15px;
+    }
+
+    .panel-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .compteur {
+        white-space: normal;
+    }
+}
+
+/* DETAILS ARTICLE */
+
+.table-detail {
+    width: 100%;
+    min-width: 0;
+}
+
+.table-detail th {
+    width: 30%;
+    color: #78859a;
+    font-weight: 600;
+    background: #f7f9fc;
+}
+
+.table-detail td {
+    color: #263247;
+}
+
+.table-detail th,
+.table-detail td {
+    padding: 15px 18px;
+    border-bottom: 1px solid #edf0f5;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.message-erreur {
+    padding: 15px;
+    background: #ffeded;
+    color: #d94d4d;
+    border-radius: 8px;
+}
+
+@media (max-width: 600px) {
+    .table-detail th {
+        width: 40%;
+    }
+
+    .table-detail th,
+    .table-detail td {
+        padding: 12px 10px;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .actions a {
+        text-align: center;
+    }
+}

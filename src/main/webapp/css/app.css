@@ -1,0 +1,355 @@
+
+/* ==================================================
+   DESIGN GLOBAL
+================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f5f7fb;
+    color: #263247;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ==================================================
+   STRUCTURE PRINCIPALE
+================================================== */
+
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+}
+
+/* ==================================================
+   SIDEBAR
+================================================== */
+
+.sidebar {
+    width: 255px;
+    background: #17243a;
+    color: #c4cede;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 25px 20px;
+    border-bottom: 1px solid #2b3850;
+}
+
+.brand-icon {
+    width: 42px;
+    height: 42px;
+    background: #3978e8;
+    color: white;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.brand h2 {
+    color: white;
+    font-size: 18px;
+}
+
+.brand span,
+.sidebar-footer span {
+    font-size: 11px;
+    color: #91a0b7;
+}
+
+.menu-title {
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1.1px;
+    color: #7788a2;
+    padding: 22px 20px 9px;
+}
+
+.navigation {
+    padding-bottom: 15px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 11px 20px;
+    margin: 3px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    transition: 0.2s;
+}
+
+.nav-link:hover {
+    background: #293951;
+    color: white;
+}
+
+.nav-link.active {
+    background: #3978e8;
+    color: white;
+}
+
+.nav-icon {
+    width: 20px;
+    min-width: 20px;
+    text-align: center;
+    font-size: 17px;
+    display: inline-block;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding: 20px;
+    border-top: 1px solid #2b3850;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.sidebar-footer strong {
+    display: block;
+    color: white;
+    font-size: 13px;
+}
+
+.user-avatar,
+.profile-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #dce8ff;
+    color: #2864c8;
+    font-weight: bold;
+}
+
+/* ==================================================
+   TOPBAR
+================================================== */
+
+.topbar {
+    min-height: 85px;
+    background: white;
+    border-bottom: 1px solid #e8edf4;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 32px;
+    gap: 15px;
+}
+
+.topbar-left,
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.topbar h1 {
+    font-size: 21px;
+    color: #202d42;
+}
+
+.topbar p {
+    color: #8792a5;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.topbar-right {
+    color: #69778d;
+    font-size: 12px;
+}
+
+.notification {
+    font-size: 21px;
+    padding: 8px;
+}
+
+.menu-toggle {
+    display: none;
+    border: 0;
+    background: transparent;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* ==================================================
+   CONTENU
+================================================== */
+
+.dashboard-content {
+    padding: 28px 32px;
+    max-width: 1600px;
+    margin: auto;
+}
+
+/* ==================================================
+   PANELS
+================================================== */
+
+.panel {
+    background: white;
+    border: 1px solid #e9edf4;
+    border-radius: 12px;
+    padding: 22px;
+    min-width: 0;
+    margin-bottom: 22px;
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.panel-header h3 {
+    font-size: 15px;
+    color: #263247;
+    margin-bottom: 6px;
+}
+
+.panel-header p {
+    font-size: 11px;
+    color: #8994a7;
+}
+
+/* ==================================================
+   TABLEAUX
+================================================== */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 650px;
+}
+
+thead {
+    background: #f7f9fc;
+}
+
+th {
+    color: #78859a;
+    font-size: 11px;
+    text-align: left;
+    font-weight: 600;
+    padding: 13px;
+}
+
+td {
+    padding: 14px 13px;
+    border-bottom: 1px solid #edf0f5;
+    font-size: 12px;
+    color: #4d5b70;
+}
+
+tbody tr:hover {
+    background: #f8faff;
+}
+
+.empty-row {
+    text-align: center;
+    color: #99a3b3;
+    padding: 30px;
+}
+
+/* ==================================================
+   BOUTONS COMMUNS
+================================================== */
+
+.btn-primary {
+    display: inline-block;
+    padding: 11px 17px;
+    background: #3978e8;
+    color: white;
+    border-radius: 8px;
+    font-size: 13px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background: #2864c8;
+}
+
+/* ==================================================
+   FOOTER
+================================================== */
+
+.page-footer {
+    text-align: center;
+    color: #99a3b3;
+    font-size: 11px;
+    padding: 15px;
+}
+
+/* ==================================================
+   RESPONSIVE COMMUN
+================================================== */
+
+@media (max-width: 750px) {
+
+    .sidebar {
+        position: fixed;
+        z-index: 10;
+        top: 0;
+        bottom: 0;
+        left: -260px;
+        transition: left 0.25s;
+        overflow-y: auto;
+    }
+
+    .sidebar.open {
+        left: 0;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .topbar {
+        padding: 0 15px;
+    }
+
+    .topbar h1 {
+        font-size: 18px;
+    }
+
+    .today {
+        display: none;
+    }
+
+    .dashboard-content {
+        padding: 18px 14px;
+    }
+}

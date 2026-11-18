@@ -1,0 +1,105 @@
+
+<aside class="sidebar">
+
+    <div class="brand">
+        <div class="brand-icon">G</div>
+        <div>
+            <h2>GestionStock</h2>
+            <span>Gestion commerciale</span>
+        </div>
+    </div>
+
+    <nav class="navigation">
+
+        <div class="menu-title">MENU PRINCIPAL</div>
+
+        <a href="${pageContext.request.contextPath}/accueil"
+           class="nav-link ${activePage == 'accueil' ? 'active' : ''}">
+            <span class="nav-icon">&#9638;</span>
+            Tableau de bord
+        </a>
+
+        <div class="menu-title">GESTION DE STOCK</div>
+
+        <a href="${pageContext.request.contextPath}/articles"
+           class="nav-link ${activePage == 'articles' ? 'active' : ''}">
+            <span class="nav-icon">&#9635;</span>
+            Articles
+        </a>
+        <a href="${pageContext.request.contextPath}/emplacements"
+               class="nav-link">
+                <span class="nav-icon">&#x2316;</span>
+                Emplacements Articles
+            </a>
+
+        <a href="${pageContext.request.contextPath}/mouvements"
+           class="nav-link ${activePage == 'mouvements' ? 'active' : ''}">
+            <span class="nav-icon">&#8644;</span>
+            Mouvements de stock
+        </a>
+
+        <div class="menu-title">APPROVISIONNEMENT</div>
+
+        <a href="${pageContext.request.contextPath}/commandes"
+           class="nav-link ${activePage == 'commandes' ? 'active' : ''}">
+            <span class="nav-icon">&#x25A4;</span>
+            Commandes fournisseurs
+        </a>
+
+        <a href="${pageContext.request.contextPath}/receptions"
+           class="nav-link ${activePage == 'receptions' ? 'active' : ''}">
+            <span class="nav-icon">&#x21E9;</span>
+            Receptions fournisseurs
+        </a>
+        
+        <a href="${pageContext.request.contextPath}/fournisseurs"
+               class="nav-link">
+                <span class="nav-icon">&#x2659;</span>
+                Fournisseurs
+            </a>
+
+        <div class="menu-title">VENTES ET CLIENTS</div>
+
+
+        <a href="${pageContext.request.contextPath}/ventes"
+           class="nav-link ${activePage == 'ventes' ? 'active' : ''}">
+            <span class="nav-icon">&#128722;</span>
+            Ventes
+        </a>
+        
+        <a href="${pageContext.request.contextPath}/clients"
+           class="nav-link ${activePage == 'clients' ? 'active' : ''}">
+            <span class="nav-icon">&#x2667;</span>
+            Clients
+        </a>
+
+            <a href="${pageContext.request.contextPath}/retours-clients"
+               class="nav-link">
+                <span class="nav-icon">&#x21B6;</span>
+                Retours clients
+            </a>
+
+            <a href="${pageContext.request.contextPath}/retours-fournisseurs"
+               class="nav-link">
+                <span class="nav-icon">&#x21B7;</span>
+                Retours fournisseurs
+            </a>
+
+            <div class="menu-title">OPERATIONS DE STOCK</div>
+
+            <a href="${pageContext.request.contextPath}/corrections"
+               class="nav-link">
+                <span class="nav-icon">&#x00B1;</span>
+                Corrections de stock
+            </a>
+    </nav>
+
+    <div class="sidebar-footer">
+        <div class="user-avatar">MH</div>
+        <div>
+            <strong>Administrateur</strong>
+            <span>Gestionnaire de stock</span>
+        </div>
+    </div>
+
+</aside>

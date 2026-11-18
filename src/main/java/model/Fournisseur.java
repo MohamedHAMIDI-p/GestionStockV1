@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Fournisseur extends AbstractEntity {
 	
+	private static final long serialVersionUID = 1L;
 	private int idFournisseur;
 	private String cnuf;
 	private String nomFournisseur;

@@ -1,0 +1,27 @@
+
+<header class="topbar">
+
+    <div class="topbar-left">
+
+        <button class="menu-toggle" onclick="toggleSidebar()">
+            &#9776;
+        </button>
+
+        <div>
+            <h1>${titrePage}</h1>
+            <p>GestionStockV1 / ${titrePage}</p>
+        </div>
+
+    </div>
+
+    <div class="topbar-right">
+
+        <span class="today" id="dateActuelle"></span>
+
+        <span class="notification">&#9827;</span>
+
+        <div class="profile-avatar">MH</div>
+
+    </div>
+
+</header>

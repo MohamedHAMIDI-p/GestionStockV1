@@ -71,6 +71,8 @@ public class ControlerServletArticle extends HttpServlet {
 		req.setAttribute("totalArticles", total);
 		req.setAttribute("pageCourante", page);
 		req.setAttribute("nbPages", nbrPages);
+		req.setAttribute("activePage", "articles");
+		req.setAttribute("titrePage", "Articles");
 		req.getRequestDispatcher("ListeArticles.jsp").forward(req, resp);
 	}
 	//DetailsArticle
@@ -144,7 +146,8 @@ private void afficherDetArticle(HttpServletRequest req,
     if (erreur != null) {
         req.setAttribute("erreur", erreur);
     }
-
+    req.setAttribute("activePage", "articles");
+    req.setAttribute("titrePage", "Articles");
     req.getRequestDispatcher("/VueArticle.jsp").forward(req, resp);
 }
 

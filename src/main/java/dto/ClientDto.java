@@ -5,6 +5,7 @@ import model.client;
 
 public class ClientDto extends AbstractEntity {
 	
+	private static final long serialVersionUID = 1L;
 	private String codeClient;
 	private String nomClient;
 	private String prenomClient;

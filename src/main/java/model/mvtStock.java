@@ -7,6 +7,7 @@ import exception.TypeMvtStock;
 
 public class mvtStock extends AbstractEntity
 {	
+	private static final long serialVersionUID = 1L;
 	private int CodeMvtArticle;
 	private int idArticle;
 	private Integer idFournisseur;

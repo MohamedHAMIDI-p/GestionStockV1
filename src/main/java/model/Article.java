@@ -6,6 +6,7 @@ import exception.TvaArticle;
 
 public class Article extends AbstractEntity {
 	
+	private static final long serialVersionUID = 1L;
 	private String codeArticle;
 	private String designation;
 	private double prixAchatArticle;

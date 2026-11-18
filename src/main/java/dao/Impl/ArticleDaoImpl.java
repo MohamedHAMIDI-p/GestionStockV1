@@ -145,13 +145,11 @@ public class ArticleDaoImpl implements ArticleDao {
 
 	@Override
 	public void updateArticle(Article a) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void deleteArticle(int idArticle) {
-		// TODO Auto-generated method stub
 		
 	}
 	
@@ -171,13 +169,6 @@ public class ArticleDaoImpl implements ArticleDao {
 		a.setTvaArticle(TvaArticle.fromTaux(rs.getInt("tvaArticle")));
 		a.setStockActuel(rs.getInt("stockActuel"));
 		return a;
-		
-	}
-	
-private ArticleDetailDto mapArticleDet(ResultSet rs) throws SQLException {
-		
-		
-		return null;
 		
 	}
 	

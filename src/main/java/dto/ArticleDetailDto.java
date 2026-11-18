@@ -5,6 +5,8 @@ import model.AbstractEntity;
 
 public class ArticleDetailDto extends AbstractEntity {
 	
+	
+	private static final long serialVersionUID = 1L;
 	//private int idArticle;
 	private String codeArticle;
 	private String designation;

@@ -1,4 +1,6 @@
-/* ===== Général ===== */
+/* ===== calcule largeur width et hauteur height 
+****     pour tous les elements de la page ===== */
+
 * { box-sizing: border-box; }
 
 body {
@@ -13,11 +15,12 @@ h1 { color: #2c3e50; margin: 0 0 25px; }
 
 /* ===== Mise en page : contenu centré ===== */
 .page {
-	max-width: 1000px;           /* largeur du contenu, à ajuster */
-	margin: 0 auto;              /* marges automatiques : la page est centrée horizontalement */
+	max-width: 1000px;
+	margin: 0 auto;
 }
 
 /* Variante plus étroite pour la page de détails (doit rester après .page) */
+
 .page.page-etroite { max-width: 720px; }
 
 .card {
@@ -40,8 +43,9 @@ h1 { color: #2c3e50; margin: 0 0 25px; }
 .compteur { color: #666; font-size: 14px; }
 
 /* ===== Tableau de la liste, dans une zone défilante ===== */
+
 .table-wrapper {
-	max-height: 60vh;            /* 60 % de la hauteur de l'écran : au-delà, barre de défilement */
+	max-height: 60vh;
 	overflow: auto;
 	border: 1px solid #e5e7eb;
 	border-radius: 6px;
@@ -140,7 +144,7 @@ h1 { color: #2c3e50; margin: 0 0 25px; }
 }
 .retour:hover { background: #1b4f72; }
 
-/* ===== Accessibilité : focus visible au clavier ===== */
+/* ===== Accessibilite : focus visible au clavier ===== */
 .pagination a:focus-visible,
 .table-liste a:focus-visible,
 .retour:focus-visible {
@@ -148,7 +152,7 @@ h1 { color: #2c3e50; margin: 0 0 25px; }
 	outline-offset: 2px;
 }
 
-/* ===== Petits écrans ===== */
+/* ===== Petits ecrans ===== */
 @media (max-width: 600px) {
 	body { padding: 12px; }
 	.card { padding: 16px; }

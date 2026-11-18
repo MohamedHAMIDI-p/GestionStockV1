@@ -60,7 +60,7 @@ public class controleurServletMvtStock extends HttpServlet {
 					lireType(req.getParameter("typeMvt")),
 					lireEntier(req.getParameter("quantite")),
 					lireMotif(req.getParameter("motif")),
-					null,                                         // fournisseur : celui de l'article par défaut
+					null,                                    
 					req.getParameter("codeClient"),
 					req.getParameter("reference"),
 					req.getParameter("commentaire"));
@@ -105,6 +105,8 @@ public class controleurServletMvtStock extends HttpServlet {
 			if (erreur != null) {
 				resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			}
+			req.setAttribute("activePage", "mouvements");
+			req.setAttribute("titrePage", "Mouvements de stock");
 			req.getRequestDispatcher("/ListeMouvements.jsp").forward(req, resp);
  
 		} catch (EntityNotFoundException e) {
