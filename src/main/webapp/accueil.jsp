@@ -1,148 +1,36 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet"
-      href="${pageContext.request.contextPath}/css/app.css">
 
-<link rel="stylesheet"
-      href="${pageContext.request.contextPath}/css/accueil.css">
-<title>GestionStock - Tableau de bord</title>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/css/app.css">
+
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/css/accueil.css">
+
+    <title>GestionStock - Accueil</title>
 </head>
+
 <body>
+
 <div class="app-container">
 
-    <!-- MENU LATERAL -->
-    <aside class="sidebar" id="sidebar">
-
-        <div class="brand">
-            <div class="brand-icon">HA</div>
-            <div>
-                <h2>GestionStock</h2>
-                <span>Gestion commerciale</span>
-            </div>
-        </div>
-
-        <div class="menu-title">MENU PRINCIPAL</div>
-
-        <nav class="navigation">
-
-            <a href="${pageContext.request.contextPath}/accueil"
-               class="nav-link active">
-                <span class="nav-icon">▦</span>
-                Tableau de bord
-            </a>
-
-            <div class="menu-title">GESTION DU STOCK</div>
-
-            <a href="${pageContext.request.contextPath}/articles"
-               class="nav-link">
-                <span class="nav-icon">▣</span>
-                Articles
-            </a>
-
-            <a href="${pageContext.request.contextPath}/emplacements"
-               class="nav-link">
-                <span class="nav-icon">⌖</span>
-                Emplacements Articles
-            </a>
-
-            <a href="${pageContext.request.contextPath}/mouvements"
-               class="nav-link">
-                <span class="nav-icon">⇄</span>
-                Mouvements de stock
-            </a>
-
-            <div class="menu-title">APPROVISIONNEMENT</div>
-
-            <a href="${pageContext.request.contextPath}/commandes"
-               class="nav-link">
-                <span class="nav-icon">▤</span>
-                Commandes fournisseurs
-            </a>
-
-            <a href="${pageContext.request.contextPath}/receptions"
-               class="nav-link">
-                <span class="nav-icon">⇩</span>
-                Receptions fournisseurs
-            </a>
-
-            <a href="${pageContext.request.contextPath}/fournisseurs"
-               class="nav-link">
-                <span class="nav-icon">♙</span>
-                Fournisseurs
-            </a>
-
-            <div class="menu-title">VENTES ET CLIENTS</div>
-
-            <a href="${pageContext.request.contextPath}/ventes"
-               class="nav-link">
-                <span class="nav-icon">🛒</span>
-                Ventes
-            </a>
-
-            <a href="${pageContext.request.contextPath}/clients"
-               class="nav-link">
-                <span class="nav-icon">♧</span>
-                Clients
-            </a>
-
-            <a href="${pageContext.request.contextPath}/retours-clients"
-               class="nav-link">
-                <span class="nav-icon">↶</span>
-                Retours clients
-            </a>
-
-            <a href="${pageContext.request.contextPath}/retours-fournisseurs"
-               class="nav-link">
-                <span class="nav-icon">↷</span>
-                Retours fournisseurs
-            </a>
-
-            <div class="menu-title">OPERATIONS DE STOCK</div>
-
-            <a href="${pageContext.request.contextPath}/corrections"
-               class="nav-link">
-                <span class="nav-icon">±</span>
-                Corrections de stock
-            </a>
-
-        </nav>
-
-        <div class="sidebar-footer">
-            <div class="user-avatar">HA</div>
-            <div>
-                <strong>Administrateur</strong>
-                <span>Gestionnaire</span>
-            </div>
-        </div>
-
-    </aside>
+    <!-- MENU LATERAL COMMUN -->
+    <%@ include file="/WEB-INF/includes/sidebar.jspf" %>
 
     <!-- CONTENU PRINCIPAL -->
     <main class="main-content">
 
-        <header class="topbar">
-
-            <div class="topbar-left">
-                <button class="menu-toggle" id="menuToggle">☰</button>
-                <div>
-                    <h1>Tableau de bord</h1>
-                    <p>Bienvenue dans votre espace de gestion de stock</p>
-                </div>
-            </div>
-
-            <div class="topbar-right">
-                <span class="today" id="currentDate"></span>
-                <div class="notification">♧</div>
-                <div class="profile-avatar">HA</div>
-            </div>
-
-        </header>
+        <!-- TOPBAR COMMUN -->
+        <%@ include file="/WEB-INF/includes/topbar.jspf" %>
 
         <section class="dashboard-content">
 
@@ -166,7 +54,8 @@
                 <div class="stat-card">
                     <div class="stat-top">
                         <div class="stat-icon blue">▣</div>
-                        <span class="stat-label">Articles</span>
+                        <a href="${pageContext.request.contextPath}/articles">
+                        <span class="stat-label">Articles</span></a>
                     </div>
                     <h2>${empty totalArticles ? 0 : totalArticles}</h2>
                     <p>Total des articles enregistrés</p>
@@ -219,16 +108,21 @@
 
             </div>
 
-            <!-- GRAPHIQUES -->
+            <!-- GRAPHIQUES ET ALERTES -->
             <div class="charts-grid">
 
+                <!-- ACTIVITE DU STOCK -->
                 <div class="panel">
+
                     <div class="panel-header">
                         <div>
                             <h3>Activité du stock</h3>
                             <p>Exemple de visualisation des entrées et sorties</p>
                         </div>
-                        <span class="panel-badge">Données de démonstration</span>
+
+                        <span class="panel-badge">
+                            Données de démonstration
+                        </span>
                     </div>
 
                     <div class="chart-legend">
@@ -237,6 +131,7 @@
                     </div>
 
                     <div class="bar-chart">
+
                         <div class="chart-y-labels">
                             <span>100</span>
                             <span>75</span>
@@ -246,11 +141,13 @@
                         </div>
 
                         <div class="chart-area">
+
                             <div class="chart-grid-lines">
                                 <i></i><i></i><i></i><i></i><i></i>
                             </div>
 
                             <div class="chart-columns">
+
                                 <div class="month-column">
                                     <div class="bars">
                                         <div class="bar entry" style="height:75%"></div>
@@ -298,6 +195,7 @@
                                     </div>
                                     <span>Juin</span>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -305,11 +203,13 @@
 
                 <!-- ALERTES -->
                 <div class="panel">
+
                     <div class="panel-header">
                         <div>
                             <h3>Alertes de stock</h3>
                             <p>Surveillance des articles</p>
                         </div>
+
                         <span class="alert-count">
                             ${empty articlesStockFaible ? 0 : articlesStockFaible}
                         </span>
@@ -335,6 +235,7 @@
                        href="${pageContext.request.contextPath}/articles">
                         Consulter les articles →
                     </a>
+
                 </div>
 
             </div>
@@ -349,10 +250,13 @@
                     </div>
 
                     <a href="${pageContext.request.contextPath}/mouvements"
-                       class="see-more">Voir tout →</a>
+                       class="see-more">
+                        Voir tout →
+                    </a>
                 </div>
 
                 <div class="table-container">
+
                     <table>
                         <thead>
                             <tr>
@@ -365,6 +269,7 @@
                         </thead>
 
                         <tbody>
+
                             <c:forEach items="${derniersMouvements}" var="m">
                                 <tr>
                                     <td>${m.reference}</td>
@@ -386,21 +291,19 @@
                                     </td>
                                 </tr>
                             </c:if>
+
                         </tbody>
                     </table>
-                </div>
 
+                </div>
             </div>
 
-            <footer class="page-footer">
-                GestionStock © 2026 — Application de gestion de stock
-            </footer>
+            <!-- FOOTER COMMUN -->
+            <%@ include file="/WEB-INF/includes/footer.jspf" %>
 
         </section>
+
     </main>
-
 </div>
-
-<script src="${pageContext.request.contextPath}/js/accueil.js"></script>
 </body>
 </html>

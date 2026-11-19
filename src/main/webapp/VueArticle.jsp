@@ -126,7 +126,7 @@
                                     </tr>
 
                                     <tr>
-                                        <th>CNuf fournisseur</th>
+                                        <th>Cnuf fournisseur</th>
                                         <td>
                                             <c:out value="${article.cnufFournisseur}" />
                                         </td>
@@ -200,6 +200,5 @@
     </main>
 
 </div>
-<script src="${pageContext.request.contextPath}/js/accueil.js"></script>
 </body>
 </html>

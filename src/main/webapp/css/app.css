@@ -353,3 +353,47 @@ tbody tr:hover {
         padding: 18px 14px;
     }
 }
+
+
+
+/* Boutons des catégories du menu */
+.menu-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    border: none;
+    background: transparent;
+    color: #9ba9bd;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    text-align: left;
+}
+
+/* Flèche du menu */
+.menu-arrow {
+    font-size: 14px;
+    transition: transform 0.25s ease;
+}
+
+/* Rotation de la flèche quand le menu est fermé */
+.menu-toggle[aria-expanded="false"] .menu-arrow {
+    transform: rotate(-90deg);
+}
+
+/* Contenu déroulant */
+.menu-items {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    max-height: 1000px;
+    transition: max-height 0.3s ease;
+}
+
+/* Menu fermé */
+.menu-items.collapsed {
+    max-height: 0;
+}

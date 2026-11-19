@@ -9,7 +9,7 @@
 
         <div>
             <h1>${titrePage}</h1>
-            <p>GestionStockV1 / ${titrePage}</p>
+            <p>GestionStock / ${titrePage}</p>
         </div>
 
     </div>

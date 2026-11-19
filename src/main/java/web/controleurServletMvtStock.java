@@ -93,8 +93,7 @@ public class controleurServletMvtStock extends HttpServlet {
 			ArticleDetailDto article = articleService.trouverDetailArticle(code.trim());
 			List<mvtStockDto> mouvements = mvtStockService.historique(code.trim());
  
-			req.setAttribute("article", article);
-			req.setAttribute("mouvements", mouvements);
+
 			req.setAttribute("types", TypeMvtStock.values());
 			req.setAttribute("motifs", MotifCorrection.values());
 			req.setAttribute("typeChoisi", lireType(req.getParameter("typeMvt")));
@@ -105,9 +104,14 @@ public class controleurServletMvtStock extends HttpServlet {
 			if (erreur != null) {
 				resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			}
+			
+			req.setAttribute("article", article);
+			req.setAttribute("mouvements", mouvements);
 			req.setAttribute("activePage", "mouvements");
 			req.setAttribute("titrePage", "Mouvements de stock");
-			req.getRequestDispatcher("/ListeMouvements.jsp").forward(req, resp);
+
+			req.getRequestDispatcher("/ListeMouvements.jsp")
+			   .forward(req, resp);
  
 		} catch (EntityNotFoundException e) {
 			resp.sendError(HttpServletResponse.SC_NOT_FOUND, e.getMessage());

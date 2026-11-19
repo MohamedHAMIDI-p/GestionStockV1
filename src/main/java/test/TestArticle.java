@@ -7,7 +7,6 @@ import java.util.List;
 import dao.ArticleDao;
 import dao.ClientDao;
 import dao.FournisseurDao;
-import dao.mvtStockDao;
 import dao.Impl.ArticleDaoImpl;
 import dao.Impl.ClientDaoImpl;
 import dao.Impl.FournisseurDaoImpl;
@@ -16,13 +15,9 @@ import dto.ArticleDetailDto;
 import dto.ArticleDto;
 import dto.ClientDto;
 import dto.mvtStockDto;
-import exception.MotifCorrection;
 import exception.TvaArticle;
-import exception.TypeMvtStock;
 import model.Article;
 import model.Fournisseur;
-import model.client;
-import model.mvtStock;
 import service.ArticleService;
 import service.ClientService;
 import service.FournisseurService;
@@ -32,7 +27,6 @@ import service.Impl.ClientServiceImpl;
 import service.Impl.FournisseurServiceImpl;
 import service.Impl.MvtStockServiceImpl;
 import util.JsonUtil;
-import util.utilConnexion;
 
 public class TestArticle {
 

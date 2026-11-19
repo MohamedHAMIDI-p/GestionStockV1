@@ -66,7 +66,6 @@ public class ClientServiceImpl implements ClientService {
 
 	@Override
 	public List<ClientDto> findListClientALL() throws SQLException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
