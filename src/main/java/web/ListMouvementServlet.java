@@ -168,34 +168,5 @@ public class ListMouvementServlet extends HttpServlet {
 	    request.getRequestDispatcher("/listMvt.jsp")
 	           .forward(request, response);
 	}
-	
-	/*@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse respone) 
-			throws ServletException, IOException {
-		try {
-			List<mvtStockDto> ListMVT=mvtService.findAllMouvement();
-			if("json".equals(request.getParameter("format"))) {
-				JsonUtil.repondreJson(respone,HttpServletResponse.SC_OK,JsonUtil.toPrettyJson(ListMVT));
-				return;
-			}
-		
-		int total=ListMVT.size();
-		int nbrPages=Math.max(1, (int)Math.ceil(total/(double)TAILLE_PAGE));
-		int page=pageLire.lireEntier(request.getParameter("page"), 1);
-		page=Math.min(Math.max(page, 1),nbrPages);
-		int debut=(page-1)*TAILLE_PAGE;
-		int fin=Math.min(debut+TAILLE_PAGE, total);
-		request.setAttribute("listMouvement",ListMVT.subList(debut,fin));
-		request.setAttribute("totalArticles", total);
-		request.setAttribute("pageCourante", page);
-		request.setAttribute("nbPages", nbrPages);
-		request.setAttribute("activePage", "mouvements");
-		request.setAttribute("titrePage", "mouvement Article");
-		
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		request.getRequestDispatcher("/listMvt.jsp").forward(request, respone);
-	}*/
 
 }

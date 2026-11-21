@@ -65,8 +65,8 @@ public class ClientServiceImpl implements ClientService {
 	}
 
 	@Override
-	public List<ClientDto> findListClientALL() throws SQLException {
-		return null;
+	public List<client> findListClientALL() throws SQLException {
+		return clientDao.findAllClient();
 	}
 
 	

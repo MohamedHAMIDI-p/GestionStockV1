@@ -5,7 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.ServletException;
 
 import dao.ClientDao;
 import model.client;
@@ -62,7 +65,20 @@ public class ClientDaoImpl implements ClientDao {
 	
 	@Override
 	public List<client> findAllClient() throws SQLException {
-		return null;
+		
+		List<client> listClient= new ArrayList<client>();
+		String sql="select * from client order by id";
+		try( Connection cn=utilConnexion.getConn();
+				PreparedStatement ps=cn.prepareStatement(sql);
+				ResultSet rs=ps.executeQuery()
+				){
+				while(rs.next()) {
+				  listClient.add(mapClient(rs));
+				}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return listClient;
 	}
 
 	private client mapClient(ResultSet rs) throws SQLException {
@@ -74,7 +90,7 @@ public class ClientDaoImpl implements ClientDao {
 		nouveauC.setPrenomClient(rs.getString("prenomClient"));
 		nouveauC.setTelephoneClient(rs.getString("telephoneClient"));
 		nouveauC.setAdresseClient(rs.getString("AdresseClient"));
-		
+		nouveauC.setDateCreation(rs.getTimestamp("dateCreation"));
 		return nouveauC;
 	}
 

@@ -1,6 +1,6 @@
 /* =========================================
    MOUVEMENTS DE STOCK
-   Styles spécifiques à ListeMouvements.jsp
+   Styles pour ListeMouvements.jsp et listMvt.jsp
    ========================================= */
 
 /* En-tête */
@@ -89,7 +89,7 @@
     margin-top: 35px;
 }
 
-/* Formulaire de création / saisie d'un mouvement */
+/* Formulaire de création et saisie d'un mouvement */
 .formulaire-mvt {
     display: grid;
     grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -521,6 +521,7 @@
     }
 }
 
+/* Liste mouvement */
 @media (max-width: 900px) {
     .formulaire-recherche-mvt {
         grid-template-columns: repeat(2, minmax(0, 1fr));

@@ -15,9 +15,9 @@ import dto.ArticleDetailDto;
 import dto.ArticleDto;
 import dto.ClientDto;
 import dto.mvtStockDto;
-import exception.TvaArticle;
 import model.Article;
 import model.Fournisseur;
+import model.client;
 import service.ArticleService;
 import service.ClientService;
 import service.FournisseurService;
@@ -48,7 +48,12 @@ public class TestArticle {
 			//ClientDto clientDto=new ClientDto("C008","HAMIDI","ACHRAF");
 			//secrviceClient.ajouterClient(clientDto);
 			ClientDto C1=secrviceClient.findByCodeClientSer("C002");
-			System.out.println(JsonUtil.toPrettyJson(C1));
+			List<client> listeClient=secrviceClient.findListClientALL();
+			System.out.println("Nombre List Client : "+listeClient.size());
+			//System.out.println(JsonUtil.toPrettyJson(C1));
+			for(client c: listeClient) {
+				System.out.println(JsonUtil.toPrettyJson(c));
+			}
 			System.out.println("================================================");
 			System.out.println("===============Ajouter Fournisseur==================");
 			Fournisseur f=new Fournisseur("F008", "Fournisseur SAvon", "Hamza","066633167","120", "ERRACHIDIA","abdelhadiHamidi@test.example","32323133243525", new Date(),new Date());
@@ -58,14 +63,15 @@ public class TestArticle {
 			//System.out.println(JsonUtil.toPrettyJson(f));
 			System.out.println("================================================");
 			System.out.println("===============Ajouter Article==================");
-			Article a= new Article("ART015","POMPE",2,6,new Date(),new Date());
+			/*Article a= new Article("ART015","POMPE",2,6,new Date(),new Date());
 			a.setPrixAchatArticle(300);
 			a.setPrixVenteArticle(200);
 			a.setPrixRevient(10);
 			a.setTvaArticle(TvaArticle.fromTaux(7));
 			a.setIdCategory(3);
-			a.setIdFournisseur(1);
+			a.setIdFournisseur(1);*/
 			//service.ajouterArticle(a);
+			
 			System.out.println("================================================");
 			System.out.println("=============Afficher Article====================");	
 			article = service.trouverDetailArticle("ART013");
@@ -82,7 +88,7 @@ public class TestArticle {
 			System.out.println("================================================");
 			System.out.println("===================Mouvements====================");
 			 article =service.trouverDetailArticle("ART002");
-			 System.out.println(JsonUtil.toPrettyJson(article));
+			 //System.out.println(JsonUtil.toPrettyJson(article));
 			//ms.enregistrerMvtStock("ART002", TypeMvtStock.reception, 10, null, null, "BR-0002", null);
 			//ms.enregistrerMvtStock("ART002", TypeMvtStock.retourEntre, 30, null, null, "FAC-0002", null);
 			/*ms.enregistrerMvtStock("ART002", TypeMvtStock.CORRECTION_INVENTAIRE_PLUS,20, MotifCorrection.PEREMPTION, null, null,
@@ -90,9 +96,9 @@ public class TestArticle {
 			// ms1 = new MvtStockServiceImpl(new ArticleDaoImpl(), new mvtStockImpl());
 			List<mvtStockDto> msList=ms.historique("ART002");
 			System.out.println("Nombre movement of list : "+msList.size());
-			for(mvtStockDto mvt:msList) {
+			/*for(mvtStockDto mvt:msList) {
 				System.out.println(JsonUtil.toPrettyJson(mvt));
-			}
+			}*/
 			System.out.println();
 			System.out.println("================================================");
 			System.out.println("================Liste Article DTO================");

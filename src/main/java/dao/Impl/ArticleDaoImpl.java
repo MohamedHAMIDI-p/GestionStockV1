@@ -41,7 +41,7 @@ public class ArticleDaoImpl implements ArticleDao {
 		ps.close();
 	}
 
-	@Override
+	@Override 
 	public Article FindArticlebyCodeArticle(String codeArticle) throws SQLException {
 		
 		String sql="select * from article where codeArticle = ?";

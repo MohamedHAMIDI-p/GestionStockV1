@@ -2,6 +2,7 @@ package web;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,19 +14,25 @@ import dao.ClientDao;
 import dao.Impl.ClientDaoImpl;
 import dto.ClientResponse;
 import model.client;
+import service.ClientService;
+import service.Impl.ClientServiceImpl;
 import util.JsonUtil;
+import util.pageLire;
 
-@WebServlet(name = "clients", urlPatterns = {"/clients"})
+@WebServlet(name = "clients", urlPatterns = {"/clients","/client"})
 public class ClientsServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
+    private static final int TAILLE_PAGE=10;
 
     private ClientDao clientDao;
-    
+    private  ClientService secrviceClient;
 
     @Override
     public void init() throws ServletException {
-        clientDao = new ClientDaoImpl();
+    	
+    	clientDao = new ClientDaoImpl();
+    	secrviceClient = new ClientServiceImpl(clientDao);
     }
     
     @Override
@@ -33,7 +40,7 @@ public class ClientsServlet extends HttpServlet {
             HttpServletRequest req,
             HttpServletResponse resp)
             throws ServletException, IOException {
-
+    	
         req.setCharacterEncoding("UTF-8");
 
         String codeClient = req.getParameter("codeClient");
@@ -42,7 +49,7 @@ public class ClientsServlet extends HttpServlet {
         String telephoneClient = req.getParameter("telephoneClient");
         String adresseClient = req.getParameter("adresseClient");
 
-        // 1. Vérification des champs obligatoires
+        // pour vérifier des champs obligatoires
         if (codeClient == null || codeClient.trim().isEmpty()
                 || nomClient == null || nomClient.trim().isEmpty()) {
 
@@ -65,7 +72,7 @@ public class ClientsServlet extends HttpServlet {
         if (adresseClient != null) adresseClient = adresseClient.trim();
 
         try {
-            // 2. Vérifier que le code n'existe pas déjà
+            // pour Vérifier l'existance de codeClient
             client existant = clientDao.findByCodeClient(codeClient);
 
             if (existant != null) {
@@ -80,7 +87,7 @@ public class ClientsServlet extends HttpServlet {
                 return;
             }
 
-            // 3. Construire l'entité client
+            // créer  le nouveau client
             client nouveauClient = new client();
 
             nouveauClient.setCodeClient(codeClient);
@@ -89,7 +96,7 @@ public class ClientsServlet extends HttpServlet {
             nouveauClient.setTelephoneClient(telephoneClient);
             nouveauClient.setAdresseClient(adresseClient);
 
-            // 4. Enregistrer dans la base de données
+            // enregistrer le nouveau 
             boolean ajoute = clientDao.ajouterClient(nouveauClient);
 
             if (!ajoute) {
@@ -104,14 +111,14 @@ public class ClientsServlet extends HttpServlet {
                 return;
             }
 
-            // 5. Préparer le nom complet
+            // Concatenation le nom complet
             String nomComplet = nomClient;
 
             if (prenomClient != null && !prenomClient.isEmpty()) {
                 nomComplet += " " + prenomClient;
             }
 
-            // 6. Réponse JSON
+            // Réponse  en format JSON
             java.util.Map<String, Object> resultat =
                     new java.util.LinkedHashMap<>();
 
@@ -146,40 +153,77 @@ public class ClientsServlet extends HttpServlet {
             HttpServletRequest req,
             HttpServletResponse resp)
             throws ServletException, IOException {
+    	
 
-        String codeClient = req.getParameter("codeClient");
+    	if("/client".equals(req.getServletPath())) {
+    		try {
+    			List<client> listClient =secrviceClient.findListClientALL();
+    			
+    			if (listClient == null) 
+    			{
+                    throw new ServletException(
+                        "Le service a retourné une liste null."
+                    );
+    			}
+				int total=listClient.size();
+				int nbrPages=Math.max(
+						1, (int)Math.ceil(total/(double)TAILLE_PAGE));
+				int page=pageLire.lireEntier(req.getParameter("page"), 1);
+				page=Math.min(Math.max(page, 1),nbrPages);
+				int debut=(page-1)*TAILLE_PAGE;
+				int fin=Math.min(debut+TAILLE_PAGE, total);
+				
+				req.setAttribute("client",listClient.subList(debut,fin));
+				
+				req.setAttribute("totalClients", total);
+				req.setAttribute("pageCourante", page);
+				req.setAttribute("nbPages", nbrPages);
+				
+				req.setAttribute("activePage", "Client");
+				req.setAttribute("titrePage", "Client");
+				
+				req.getRequestDispatcher("Client.jsp").forward(req, resp);	
+    		}catch(SQLException e) {
+    			throw new ServletException("Erreur de charger les Clients",e);
+    		}
+    		}else 
+    		{
+    		String codeClient = req.getParameter("codeClient");
 
-        if (codeClient == null || codeClient.trim().isEmpty()) {
-           JsonUtil.repondreJson(resp, HttpServletResponse.SC_BAD_REQUEST, 
-        		   JsonUtil.erreurJson("Code Client Obligatoire", "CLIENT_CODE_REQUIRED"));
-            return;
-        }
-
-        try {
-            client cl = clientDao.findByCodeClient(codeClient.trim());
-            
-            ClientResponse resultat;
-
-            if (cl == null) {
-            	resultat=new ClientResponse(false, 0, null, null, null,"Client introuvable");
-            } else {
-            	resultat= new ClientResponse(
-            			true,
-            			cl.getId(),
-                        cl.getCodeClient(),
-                        cl.getNomClient(),
-                        cl.getPrenomClient(),
-                        "Client trouvé"
-            			);
+            if (codeClient == null || codeClient.trim().isEmpty()) {
+               JsonUtil.repondreJson(resp, HttpServletResponse.SC_BAD_REQUEST, 
+            		   JsonUtil.erreurJson("Code Client Obligatoire", "CLIENT_CODE_REQUIRED"));
+                return;
             }
-            
-            JsonUtil.repondreJson(resp, HttpServletResponse.SC_OK, JsonUtil.toJson(resultat));
 
-        } catch (SQLException e) {
-            log("Erreur lors de la recherche du client", e);
+            try {
+                client cl = clientDao.findByCodeClient(codeClient.trim());
+                
+                ClientResponse resultat;
 
-            JsonUtil.repondreJson(resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, 
-            		JsonUtil.erreurJson("Erreur lors de la recherche du client", "CLIENT_SEARCH_ERROR"));
-        }
+                if (cl == null) {
+                	resultat=new ClientResponse(false, 0, null, null, null,"Client introuvable");
+                } else {
+                	resultat= new ClientResponse(
+                			true,
+                			cl.getId(),
+                            cl.getCodeClient(),
+                            cl.getNomClient(),
+                            cl.getPrenomClient(),
+                            "Client trouvé"
+                			);
+                }
+                
+                JsonUtil.repondreJson(resp, HttpServletResponse.SC_OK, JsonUtil.toJson(resultat));
+
+            } catch (SQLException e) {
+                log("Erreur lors de la recherche du client", e);
+
+                JsonUtil.repondreJson(resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, 
+                		JsonUtil.erreurJson("Erreur lors de la recherche du client", "CLIENT_SEARCH_ERROR"));
+            }
+    	}
+
+        
     }
 }

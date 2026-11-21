@@ -1,142 +1,104 @@
 
 <aside class="sidebar">
 
-    <div class="brand">
-        <div class="brand-icon">HA</div>
-        <div>
-            <h2>GestionStock</h2>
-            <span>Gestion commerciale</span>
-        </div>
-    </div>
+	<div class="brand">
+		<div class="brand-icon">HA</div>
+		<div>
+			<h2>GestionStock</h2>
+			<span>Gestion commerciale</span>
+		</div>
+	</div>
+	<nav class="navigation">
 
-    
-<nav class="navigation">
+		<button type="button" class="menu-title menu-toggle"
+			aria-expanded="true" aria-controls="menuPrincipal">
+			<span>MENU PRINCIPAL</span> <span class="menu-arrow">&#9662;</span>
+		</button>
 
-    <!-- MENU PRINCIPAL -->
-    <button type="button" class="menu-title menu-toggle"
-            aria-expanded="true" aria-controls="menuPrincipal">
-        <span>MENU PRINCIPAL</span>
-        <span class="menu-arrow">&#9662;</span>
-    </button>
+		<div class="menu-items" id="menuPrincipal">
+			<a href="${pageContext.request.contextPath}/accueil"
+				class="nav-link ${activePage == 'accueil' ? 'active' : ''}"> <span
+				class="nav-icon">&#9638;</span> Accueil
+			</a>
+		</div>
 
-    <div class="menu-items" id="menuPrincipal">
-        <a href="${pageContext.request.contextPath}/accueil"
-           class="nav-link ${activePage == 'accueil' ? 'active' : ''}">
-            <span class="nav-icon">&#9638;</span>
-            Accueil
-        </a>
-    </div>
+		<button type="button" class="menu-title menu-toggle"
+			aria-expanded="true" aria-controls="menuStock">
+			<span>GESTION DE STOCK</span> <span class="menu-arrow">&#9662;</span>
+		</button>
 
-    <!-- GESTION DE STOCK -->
-    <button type="button" class="menu-title menu-toggle"
-            aria-expanded="true" aria-controls="menuStock">
-        <span>GESTION DE STOCK</span>
-        <span class="menu-arrow">&#9662;</span>
-    </button>
+		<div class="menu-items" id="menuStock">
+			<a href="${pageContext.request.contextPath}/articles"
+				class="nav-link ${activePage == 'articles' ? 'active' : ''}"> <span
+				class="nav-icon">&#9635;</span> Articles
+			</a> <a href="${pageContext.request.contextPath}/emplacements"
+				class="nav-link ${activePage == 'emplacements' ? 'active' : ''}">
+				<span class="nav-icon">&#x2316;</span> Emplacements Articles
+			</a> <a href="${pageContext.request.contextPath}/listMouvement"
+				class="nav-link ${activePage == 'mouvements' ? 'active' : ''}">
+				<span class="nav-icon">&#8644;</span> Mouvements de stock
+			</a>
+		</div>
 
-    <div class="menu-items" id="menuStock">
-        <a href="${pageContext.request.contextPath}/articles"
-           class="nav-link ${activePage == 'articles' ? 'active' : ''}">
-            <span class="nav-icon">&#9635;</span>
-            Articles
-        </a>
+		<button type="button" class="menu-title menu-toggle"
+			aria-expanded="true" aria-controls="menuAppro">
+			<span>APPROVISIONNEMENT</span> <span class="menu-arrow">&#9662;</span>
+		</button>
 
-        <a href="${pageContext.request.contextPath}/emplacements"
-           class="nav-link ${activePage == 'emplacements' ? 'active' : ''}">
-            <span class="nav-icon">&#x2316;</span>
-            Emplacements Articles
-        </a>
+		<div class="menu-items" id="menuAppro">
 
-        <a href="${pageContext.request.contextPath}/listMouvement"
-           class="nav-link ${activePage == 'mouvements' ? 'active' : ''}">
-            <span class="nav-icon">&#8644;</span>
-            Mouvements de stock
-        </a>
-    </div>
+			<a href="${pageContext.request.contextPath}/fournisseurs"
+				class="nav-link ${activePage == 'fournisseurs' ? 'active' : ''}">
+				<span class="nav-icon">&#x2659;</span> Fournisseurs
+			</a> <a href="${pageContext.request.contextPath}/commandes"
+				class="nav-link ${activePage == 'commandes' ? 'active' : ''}"> <span
+				class="nav-icon">&#x25A4;</span> Commandes fournisseurs
+			</a> <a href="${pageContext.request.contextPath}/receptions"
+				class="nav-link ${activePage == 'receptions' ? 'active' : ''}">
+				<span class="nav-icon">&#x21E9;</span> Receptions fournisseurs
+			</a> <a href="${pageContext.request.contextPath}/retours-fournisseurs"
+				class="nav-link ${activePage == 'retours-fournisseurs' ? 'active' : ''}">
+				<span class="nav-icon">&#x21B7;</span> Retours fournisseurs
+			</a>
+		</div>
 
-    <!-- APPROVISIONNEMENT -->
-    <button type="button" class="menu-title menu-toggle"
-            aria-expanded="true" aria-controls="menuAppro">
-        <span>APPROVISIONNEMENT</span>
-        <span class="menu-arrow">&#9662;</span>
-    </button>
+		<button type="button" class="menu-title menu-toggle"
+			aria-expanded="true" aria-controls="menuVentes">
+			<span>VENTES ET CLIENTS</span> <span class="menu-arrow">&#9662;</span>
+		</button>
 
-    <div class="menu-items" id="menuAppro">
-    
-         <a href="${pageContext.request.contextPath}/fournisseurs"
-           class="nav-link ${activePage == 'fournisseurs' ? 'active' : ''}">
-            <span class="nav-icon">&#x2659;</span>
-            Fournisseurs
-        </a>
-        <a href="${pageContext.request.contextPath}/commandes"
-           class="nav-link ${activePage == 'commandes' ? 'active' : ''}">
-            <span class="nav-icon">&#x25A4;</span>
-            Commandes fournisseurs
-        </a>
+		<div class="menu-items" id="menuVentes">
+			<a href="${pageContext.request.contextPath}/ventes"
+				class="nav-link ${activePage == 'ventes' ? 'active' : ''}"> <span
+				class="nav-icon">&#128722;</span> Ventes
+			</a> <a href="${pageContext.request.contextPath}/client"
+				class="nav-link ${activePage == 'clients' ? 'active' : ''}"> <span
+				class="nav-icon">&#x2667;</span> Clients
+			</a> <a href="${pageContext.request.contextPath}/retours-clients"
+				class="nav-link ${activePage == 'retours-clients' ? 'active' : ''}">
+				<span class="nav-icon">&#x21B6;</span> Retours clients
+			</a>
+		</div>
 
-        <a href="${pageContext.request.contextPath}/receptions"
-           class="nav-link ${activePage == 'receptions' ? 'active' : ''}">
-            <span class="nav-icon">&#x21E9;</span>
-            Receptions fournisseurs
-        </a>
-        
-        <a href="${pageContext.request.contextPath}/retours-fournisseurs"
-           class="nav-link ${activePage == 'retours-fournisseurs' ? 'active' : ''}">
-            <span class="nav-icon">&#x21B7;</span>
-            Retours fournisseurs
-        </a>
-    </div>
+		<button type="button" class="menu-title menu-toggle"
+			aria-expanded="true" aria-controls="menuOperations">
+			<span>OPERATIONS DE STOCK</span> <span class="menu-arrow">&#9662;</span>
+		</button>
 
-    <!-- VENTES ET CLIENTS -->
-    <button type="button" class="menu-title menu-toggle"
-            aria-expanded="true" aria-controls="menuVentes">
-        <span>VENTES ET CLIENTS</span>
-        <span class="menu-arrow">&#9662;</span>
-    </button>
+		<div class="menu-items" id="menuOperations">
+			<a href="${pageContext.request.contextPath}/corrections"
+				class="nav-link ${activePage == 'corrections' ? 'active' : ''}">
+				<span class="nav-icon">&#x00B1;</span> Corrections de stock
+			</a>
+		</div>
 
-    <div class="menu-items" id="menuVentes">
-        <a href="${pageContext.request.contextPath}/ventes"
-           class="nav-link ${activePage == 'ventes' ? 'active' : ''}">
-            <span class="nav-icon">&#128722;</span>
-            Ventes
-        </a>
+	</nav>
 
-        <a href="${pageContext.request.contextPath}/clients"
-           class="nav-link ${activePage == 'clients' ? 'active' : ''}">
-            <span class="nav-icon">&#x2667;</span>
-            Clients
-        </a>
-
-        <a href="${pageContext.request.contextPath}/retours-clients"
-           class="nav-link ${activePage == 'retours-clients' ? 'active' : ''}">
-            <span class="nav-icon">&#x21B6;</span>
-            Retours clients
-        </a>
-    </div>
-
-    <!-- OPERATIONS DE STOCK -->
-    <button type="button" class="menu-title menu-toggle"
-            aria-expanded="true" aria-controls="menuOperations">
-        <span>OPERATIONS DE STOCK</span>
-        <span class="menu-arrow">&#9662;</span>
-    </button>
-
-    <div class="menu-items" id="menuOperations">
-        <a href="${pageContext.request.contextPath}/corrections"
-           class="nav-link ${activePage == 'corrections' ? 'active' : ''}">
-            <span class="nav-icon">&#x00B1;</span>
-            Corrections de stock
-        </a>
-    </div>
-
-</nav>
-
-    <div class="sidebar-footer">
-        <div class="user-avatar">HA</div>
-        <div>
-            <strong>Administrateur</strong>
-            <span>Gestionnaire de stock</span>
-        </div>
-    </div>
-<script src="${pageContext.request.contextPath}/js/sidebar.js"></script>
+	<div class="sidebar-footer">
+		<div class="user-avatar">HA</div>
+		<div>
+			<strong>Administrateur</strong> <span>Gestionnaire de stock</span>
+		</div>
+	</div>
+	<script src="${pageContext.request.contextPath}/js/sidebar.js"></script>
 </aside>
