@@ -13,4 +13,13 @@ public interface MvtStockService {
 	mvtStock enregistrerMvtStock(String codeArticle, TypeMvtStock type, int quantite, MotifCorrection motif,
 	Integer idFournisseur,String codeClient, String reference, String commentaire) throws SQLException;
 	List<mvtStockDto> historique(String codeArticle) throws SQLException;
+	List<mvtStockDto> findAllMouvement() throws SQLException;
+	List<mvtStockDto> rechercherMouvements(
+	        String codeArticle,
+	        Integer idMouvement,
+	        String reference,
+	        String cnuf,
+	        TypeMvtStock typeMouvement,
+	        java.sql.Date dateMouvement
+	) throws SQLException;
 }

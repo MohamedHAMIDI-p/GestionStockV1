@@ -52,7 +52,8 @@ public class ControlerServletArticle extends HttpServlet {
 	}
 	
 	//listearticle 
-	private void afficherListArticle(HttpServletRequest req,HttpServletResponse resp) throws ServletException,IOException,SQLException
+	private void afficherListArticle(HttpServletRequest req,HttpServletResponse resp) 
+			throws ServletException,IOException,SQLException
 	{
 		List<ArticleDto> articleDtos=articleService.findListArticleDto();
 		if("json".equals(req.getParameter("format"))) 
@@ -67,7 +68,6 @@ public class ControlerServletArticle extends HttpServlet {
 		int debut=(page-1)*TAILLE_PAGE;
 		int fin=Math.min(debut+TAILLE_PAGE, total);
 		req.setAttribute("articles",articleDtos.subList(debut,fin));
-		//req.setAttribute("articles",articleDtos);
 		req.setAttribute("totalArticles", total);
 		req.setAttribute("pageCourante", page);
 		req.setAttribute("nbPages", nbrPages);

@@ -136,6 +136,33 @@ public class MvtStockServiceImpl  implements MvtStockService{
 		ArticleDetailDto article = trouverArticle(codeArticle);
 		return mvtStockDao.findHistorique(article.getCodeArticle());
 	}	
+	
+	@Override
+	public List<mvtStockDto> findAllMouvement() throws SQLException {
+		// TODO Auto-generated method stub
+		return mvtStockDao.findAllMouvement();
+	}
+	
+	@Override
+	public List<mvtStockDto> rechercherMouvements(
+	        String codeArticle,
+	        Integer idMouvement,
+	        String reference,
+	        String cnuf,
+	        TypeMvtStock typeMouvement,
+	        java.sql.Date dateMouvement
+	) throws SQLException {
+
+	    return mvtStockDao.rechercherMouvements(
+	        codeArticle,
+	        idMouvement,
+	        reference,
+	        cnuf,
+	        typeMouvement,
+	        dateMouvement
+	    );
+	}
+
 	// ---------- methodes privées ----------
  
 	private ArticleDetailDto trouverArticle(String codeArticle) throws SQLException {
@@ -167,4 +194,5 @@ public class MvtStockServiceImpl  implements MvtStockService{
 		return v.isEmpty() ? null : v;
 	}
 
+	
 }

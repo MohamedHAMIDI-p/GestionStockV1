@@ -5,6 +5,7 @@ import java.util.Date;
 import exception.MotifCorrection;
 import exception.TypeMvtStock;
 import model.AbstractEntity;
+import model.mvtStock;
 
 public class mvtStockDto extends AbstractEntity {
 
@@ -19,6 +20,8 @@ public class mvtStockDto extends AbstractEntity {
 	private int variation;
 	private String reference;
 	private String commentaire;
+	private String nomClient;
+	private String prenomClient;
 	
 	public mvtStockDto() {
 		super();
@@ -103,6 +106,39 @@ public class mvtStockDto extends AbstractEntity {
 	public void setCommentaire(String commentaire) {
 		this.commentaire = commentaire;
 	}
+
+	public String getNomClient() {
+		return nomClient;
+	}
+
+	public void setNomClient(String nomClient) {
+		this.nomClient = nomClient;
+	}
+
+	public String getPrenomClient() {
+		return prenomClient;
+	}
+
+	public void setPrenomClient(String prenomClient) {
+		this.prenomClient = prenomClient;
+	}
 	
-	
+	//entity => dto
+	public static mvtStockDto fromEntity(mvtStock mvtStkDto) {
+		if(mvtStkDto==null) {
+			return null;
+		}
+		mvtStockDto mvStkDto=new mvtStockDto();
+		mvStkDto.setId(mvtStkDto.getId());
+		return mvStkDto;
+	}
+	//Dto => entity
+	public static mvtStock toEntity(mvtStockDto mvtstkDto) {
+		if(mvtstkDto==null) {
+			return null;
+		}
+		mvtStock mvtStoc= new mvtStock();
+		mvtStoc.setId(mvtstkDto.getId());
+		return mvtStoc;
+	}
 }

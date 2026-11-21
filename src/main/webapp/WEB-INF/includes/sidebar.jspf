@@ -47,7 +47,7 @@
             Emplacements Articles
         </a>
 
-        <a href="${pageContext.request.contextPath}/mouvements"
+        <a href="${pageContext.request.contextPath}/listMouvement"
            class="nav-link ${activePage == 'mouvements' ? 'active' : ''}">
             <span class="nav-icon">&#8644;</span>
             Mouvements de stock

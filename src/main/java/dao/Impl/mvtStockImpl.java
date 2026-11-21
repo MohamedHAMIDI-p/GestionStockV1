@@ -119,5 +119,123 @@ public class mvtStockImpl implements mvtStockDao {
 		}
 		return liste;
 	}
+	@Override
+	public List<mvtStockDto> findAllMouvement() throws SQLException {
+		
+		List<mvtStockDto> lisMouvement=new ArrayList<mvtStockDto>();
+		String sql="SELECT  a.codeArticle,m.typeMouvement, m.variation, m.motif, m.reference, m.commentaire,m.dateMouvement,f.cnuf, f.nomFournisseur, "
+				+ " c. nomClient,c.prenomClient  "
+				+ "  FROM mouvement m  "
+				+ " JOIN article a ON a.id = m.idArticle "
+				+ " LEFT JOIN fournisseur f ON m.idFournisseur = f.id "
+				+ " LEFT JOIN client c ON m.idClient=c.id "
+				+ " ORDER BY m.dateMouvement desc";
+		try(Connection cn=util.utilConnexion.getConn();
+				PreparedStatement ps=cn.prepareStatement(sql);
+				ResultSet rs=ps.executeQuery()){
+						while(rs.next()) {
+							lisMouvement.add(mapMouvement(rs));
+						}
+			
+		}
+		return lisMouvement;
+	}
+	@Override
+	public List<mvtStockDto> rechercherMouvements(
+	        String codeArticle,
+	        Integer idMouvement,
+	        String reference,
+	        String cnuf,
+	        TypeMvtStock typeMouvement,
+	        java.sql.Date dateMouvement
+	) throws SQLException {
+
+	    List<mvtStockDto> liste = new ArrayList<>();
+
+	    StringBuilder sql = new StringBuilder(
+	        "SELECT m.id, a.codeArticle, m.typeMouvement, " +
+	        "m.variation, m.motif, m.reference, m.commentaire, " +
+	        "m.dateMouvement, f.cnuf, f.nomFournisseur, " +
+	        "c.nomClient, c.prenomClient " +
+	        "FROM mouvement m " +
+	        "JOIN article a ON a.id = m.idArticle " +
+	        "LEFT JOIN fournisseur f ON f.id = m.idFournisseur " +
+	        "LEFT JOIN client c ON c.id = m.idClient " +
+	        "WHERE 1=1 "
+	    );
+
+	    List<Object> parametres = new ArrayList<>();
+
+	    if (codeArticle != null && !codeArticle.trim().isEmpty()) {
+	        sql.append(" AND a.codeArticle LIKE ? ");
+	        parametres.add("%" + codeArticle.trim() + "%");
+	    }
+
+	    if (idMouvement != null) {
+	        sql.append(" AND m.id = ? ");
+	        parametres.add(idMouvement);
+	    }
+
+	    if (reference != null && !reference.trim().isEmpty()) {
+	        sql.append(" AND m.reference LIKE ? ");
+	        parametres.add("%" + reference.trim() + "%");
+	    }
+
+	    if (cnuf != null && !cnuf.trim().isEmpty()) {
+	        sql.append(" AND f.cnuf LIKE ? ");
+	        parametres.add("%" + cnuf.trim() + "%");
+	    }
+	    
+	    if (typeMouvement != null) {
+	        sql.append(" AND m.typeMouvement = ? ");
+	        parametres.add(typeMouvement.name());
+	    }
+	    if (dateMouvement != null) {
+	        sql.append(" AND m.dateMouvement >= ? ");
+	        sql.append(" AND m.dateMouvement < DATE_ADD(?, INTERVAL 1 DAY) ");
+
+	        parametres.add(dateMouvement);
+	        parametres.add(dateMouvement);
+	    }
+
+	    sql.append(" ORDER BY m.dateMouvement DESC, m.id DESC");
+
+	    try (Connection cn = util.utilConnexion.getConn();
+	         PreparedStatement ps = cn.prepareStatement(sql.toString())) {
+
+	        for (int i = 0; i < parametres.size(); i++) {
+	            ps.setObject(i + 1, parametres.get(i));
+	        }
+
+	        try (ResultSet rs = ps.executeQuery()) {
+	            while (rs.next()) {
+	                mvtStockDto mouvement = mapMouvement(rs);
+	                mouvement.setId(rs.getInt("id"));
+	                liste.add(mouvement);
+	            }
+	        }
+	    }
+
+	    return liste;
+	}
+	
+	/****** Methode Prives *******/
+	private mvtStockDto mapMouvement(ResultSet rs) throws SQLException {
+
+		mvtStockDto mvtStkDto= new mvtStockDto();
+		mvtStkDto.setCodeArticle(rs.getString("codeArticle"));
+		mvtStkDto.setTypemvtStock(TypeMvtStock.valueOf(rs.getString("typeMouvement")));
+		String motif=rs.getString("motif");
+		mvtStkDto.setMotif(motif== null ? null :MotifCorrection.valueOf(motif));
+		mvtStkDto.setVariation(rs.getInt("variation"));
+		mvtStkDto.setReference(rs.getString("reference"));
+		mvtStkDto.setCommentaire(rs.getString("commentaire"));
+		mvtStkDto.setDateMvtStock(rs.getTimestamp("dateMouvement"));
+		mvtStkDto.setCnuf(rs.getString("cnuf"));
+		mvtStkDto.setNomFournisseur(rs.getString("nomFournisseur"));
+		mvtStkDto.setNomClient(rs.getString("nomClient"));
+		mvtStkDto.setPrenomClient(rs.getString("prenomClient"));
+		return mvtStkDto;
+	}
 	
 }

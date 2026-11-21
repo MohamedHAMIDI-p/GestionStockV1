@@ -91,7 +91,7 @@ public class TestArticle {
 			List<mvtStockDto> msList=ms.historique("ART002");
 			System.out.println("Nombre movement of list : "+msList.size());
 			for(mvtStockDto mvt:msList) {
-				System.out.println(JsonUtil.toPrettyJson(msList));
+				System.out.println(JsonUtil.toPrettyJson(mvt));
 			}
 			System.out.println();
 			System.out.println("================================================");

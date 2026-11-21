@@ -64,7 +64,8 @@
                 <div class="stat-card">
                     <div class="stat-top">
                         <div class="stat-icon green">♧</div>
-                        <span class="stat-label">Clients</span>
+                        <a href="${pageContext.request.contextPath}/articles">
+                        <span class="stat-label">Clients</span></a>
                     </div>
                     <h2>${empty totalClients ? 0 : totalClients}</h2>
                     <p>Clients enregistrés</p>
@@ -100,7 +101,8 @@
                 <div class="stat-card">
                     <div class="stat-top">
                         <div class="stat-icon teal">⇄</div>
-                        <span class="stat-label">Mouvements</span>
+                        <a href="${pageContext.request.contextPath}/listMouvement">
+                        <span class="stat-label">Mouvements</span></a>
                     </div>
                     <h2>${empty totalMouvements ? 0 : totalMouvements}</h2>
                     <p>Total des mouvements enregistrés</p>
@@ -249,7 +251,7 @@
                         <p>Suivi des opérations récentes</p>
                     </div>
 
-                    <a href="${pageContext.request.contextPath}/mouvements"
+                    <a href="${pageContext.request.contextPath}/listMouvement"
                        class="see-more">
                         Voir tout →
                     </a>
@@ -270,7 +272,7 @@
 
                         <tbody>
 
-                            <c:forEach items="${derniersMouvements}" var="m">
+                            <c:forEach items="${listMouvement}" var="m">
                                 <tr>
                                     <td>${m.reference}</td>
                                     <td>${m.codeArticle}</td>
