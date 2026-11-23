@@ -54,7 +54,7 @@
                 <c:choose>
 
                     <c:when test="${empty client}">
-                        <p class="empty-row">Aucun article à afficher.</p>
+                        <p class="empty-row">Aucun Client à afficher.</p>
                     </c:when>
 
                     <c:otherwise>
@@ -70,7 +70,7 @@
                                         <th>Prenom</th>
                                         <th>Telephone</th>
                                         <th>Adresse</th>
-                                        <th>DAteCreation</th>
+                                        <th>Date Creation</th>
                                     </tr>
                                 </thead>
 

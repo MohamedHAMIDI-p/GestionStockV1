@@ -1,6 +1,7 @@
 package service.Impl;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import dao.FournisseurDao;
 import exception.EntityNotFoundException;
@@ -15,7 +16,6 @@ public class FournisseurServiceImpl implements FournisseurService {
 
 	
 	public FournisseurServiceImpl(FournisseurDao fournisseurDao) {
-		super();
 		this.fournisseurDao = fournisseurDao;
 	}
 
@@ -59,6 +59,12 @@ public class FournisseurServiceImpl implements FournisseurService {
 			throw new EntityNotFoundException("Fournisseur Introuvable ", ErreurCodes.FOURNISSEUR_NOT_FOUND);
 		}
 		return f;
+	}
+
+	@Override
+	public List<Fournisseur> findAllFournisseur() throws SQLException {
+		// TODO Auto-generated method stub
+		return fournisseurDao.lisFournisseurAllFournisseurs();
 	}
 
 	

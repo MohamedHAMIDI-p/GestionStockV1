@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import dao.FournisseurDao;
 import model.Fournisseur;
@@ -46,12 +48,30 @@ public class FournisseurDaoImpl implements FournisseurDao {
 			}
 		}
 	}
-
+	@Override
+	public List<Fournisseur> lisFournisseurAllFournisseurs() throws SQLException {
+		
+		List<Fournisseur> lisFour=new ArrayList<Fournisseur>();
+		
+		String sql="select * from fournisseur order by id asc";
+		
+		try(Connection cn =util.utilConnexion.getConn();
+				PreparedStatement pr=cn.prepareStatement(sql);
+				ResultSet rs=pr.executeQuery()
+			){
+			while (rs.next()) {
+				lisFour.add(mapFournisseur(rs));
+			}
+		}
+		return lisFour;
+	}
+	
+// Methode Privés
 	private Fournisseur mapFournisseur(ResultSet rs) throws SQLException {
 		Fournisseur f = new Fournisseur();
 		f.setId(rs.getInt("id"));
-		f.setCnuf(rs.getString("nomFournisseur"));
 		f.setCnuf(rs.getString("cnuf"));
+		f.setNomFournisseur(rs.getString("nomFournisseur"));
 		f.setPrenomFournisseur(rs.getString("prenomFournisseur"));
 		f.setTelephoneFournisseur(rs.getString("telephoneFournisseur"));
 		f.setCodePostal(rs.getString("codePostal"));
@@ -62,5 +82,6 @@ public class FournisseurDaoImpl implements FournisseurDao {
 		f.setDateModification(rs.getTimestamp("dateModification"));
 		return f;
 	}
+
 	
 }

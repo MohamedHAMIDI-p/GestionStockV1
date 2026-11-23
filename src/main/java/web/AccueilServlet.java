@@ -14,18 +14,23 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.ArticleDao;
 import dao.ClientDao;
+import dao.FournisseurDao;
 import dao.mvtStockDao;
 import dao.Impl.ArticleDaoImpl;
 import dao.Impl.ClientDaoImpl;
+import dao.Impl.FournisseurDaoImpl;
 import dao.Impl.mvtStockImpl;
 import dto.ArticleDto;
 import dto.mvtStockDto;
+import model.Fournisseur;
 import model.client;
 import service.ArticleService;
 import service.ClientService;
+import service.FournisseurService;
 import service.MvtStockService;
 import service.Impl.ArticleServiceImpl;
 import service.Impl.ClientServiceImpl;
+import service.Impl.FournisseurServiceImpl;
 import service.Impl.MvtStockServiceImpl;
 import util.JsonUtil;
 
@@ -37,11 +42,11 @@ public class AccueilServlet extends HttpServlet {
 	private ArticleDao articledao = new ArticleDaoImpl();
 	private mvtStockDao mvststocDao=new mvtStockImpl();
 	private ClientDao clientDao= new ClientDaoImpl();
+	private FournisseurDao fournisseurDao= new FournisseurDaoImpl();
 	
 	private ArticleService articleService=new ArticleServiceImpl(articledao);
-	
 	private ClientService clientService=new ClientServiceImpl(clientDao);
-	
+	private FournisseurService fournisseurService=new FournisseurServiceImpl(fournisseurDao);
 	private MvtStockService mvtService=new MvtStockServiceImpl(articledao, mvststocDao, clientDao);
 
 	@Override
@@ -50,10 +55,9 @@ public class AccueilServlet extends HttpServlet {
 		try {
 			
 			List<ArticleDto> articleDtos=articleService.findListArticleDto();
-			
 			List<mvtStockDto> LsitMvts=mvtService.findAllMouvement();
-			
 			List<client> clientList=clientService.findListClientALL();
+			List<Fournisseur> fournisseurList=fournisseurService.findAllFournisseur();
 			
 			LocalDate aujourdHui=LocalDate.now(ZoneId.of("Africa/Casablanca"));
 			java.sql.Date dateDuJour=java.sql.Date.valueOf(aujourdHui);
@@ -73,6 +77,9 @@ public class AccueilServlet extends HttpServlet {
 			int totalClient=clientList.size();
 			request.setAttribute("totalClients", totalClient);
 			
+			int totalFournisseurs=fournisseurList.size();
+			request.setAttribute("totalFournisseurs", totalFournisseurs);
+			
 			if("json".equals(request.getParameter("format"))) 
 			{
 				JsonUtil.repondreJson(response,HttpServletResponse.SC_OK,JsonUtil.toPrettyJson(articleDtos));
@@ -86,9 +93,6 @@ public class AccueilServlet extends HttpServlet {
 		}
 		
 		
-		
-		
-		request.setAttribute("totalFournisseurs", 0);
 		request.setAttribute("commandesEnAttente", 0);
 		request.setAttribute("articlesStockFaible", 0);
 		

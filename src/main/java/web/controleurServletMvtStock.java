@@ -108,7 +108,7 @@ public class controleurServletMvtStock extends HttpServlet {
 			req.setAttribute("article", article);
 			req.setAttribute("mouvements", mouvements);
 			req.setAttribute("activePage", "articles");
-			req.setAttribute("titrePage", "Mouvements de stock");
+			req.setAttribute("titrePage", "Mouvements de l'article "+article.getCodeArticle());
 
 			req.getRequestDispatcher("/ListeMouvements.jsp")
 			   .forward(req, resp);

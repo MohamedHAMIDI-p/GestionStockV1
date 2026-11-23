@@ -77,7 +77,8 @@
 					<div class="stat-card">
 						<div class="stat-top">
 							<div class="stat-icon purple">♙</div>
-							<span class="stat-label">Fournisseurs</span>
+							<a href="${pageContext.request.contextPath}/fournisseurs"><span
+							 class="stat-label">Fournisseurs</span></a>
 						</div>
 						<h2>${empty totalFournisseurs ? 0 : totalFournisseurs}</h2>
 						<p>Fournisseurs enregistrés</p>

@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.ServletException;
 
 import dao.ClientDao;
 import model.client;
