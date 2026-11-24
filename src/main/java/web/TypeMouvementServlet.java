@@ -1,6 +1,8 @@
 package web;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -17,8 +19,10 @@ import dao.Impl.ArticleDaoImpl;
 import dao.Impl.ClientDaoImpl;
 import dao.Impl.FournisseurDaoImpl;
 import dao.Impl.mvtStockImpl;
+import dto.mvtStockDto;
 import service.MvtStockService;
 import service.Impl.MvtStockServiceImpl;
+import util.pageLire;
 
 @WebServlet(name = "TypeMouvements",urlPatterns = 
 {"/commandes","/receptions","/retours-fournisseurs","/ventes","/retours-clients","/corrections"})
@@ -45,17 +49,96 @@ public class TypeMouvementServlet extends HttpServlet {
 		
 	}
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		String typeMvt = request.getParameter("typeMouvement");
 
-		if("/receptions".equals(request.getServletPath())) {
-			
-			request.getRequestDispatcher("/MvtReception.jsp")
-	           .forward(request, response);
+		String chemin=request.getServletPath();
+		
+		switch(chemin) {	
+					case "/commandes": afficherCommandes(request,response); break; 
+					case "/receptions": try {
+				afficherReception(request,response);
+			} catch (ServletException | IOException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} break;
+					case "/retours-fournisseurs" : try {
+				afficherRetourFourn(request,response);
+			} catch (ServletException | IOException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}break;
 		}
+	}
 	
+	
+	//Méthode Privé 
+	
+	private void afficherCommandes( HttpServletRequest request,
+	        HttpServletResponse response)
+	                throws ServletException, IOException {
+		request.getRequestDispatcher("/MvtReception.jsp").forward(request, response);
+	}
+	
+	private void afficherReception(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException,IOException, SQLException {
+		List<mvtStockDto> ListMouvement;
+		List<mvtStockDto> ListMouvementNouveau;
+		ListMouvementNouveau=new ArrayList<mvtStockDto>();
+		ListMouvement=mvtStockService.findAllMouvement();
+		for(mvtStockDto mvtDto: ListMouvement) {
+			if(("Reception Fournisseur").equals(mvtDto.getTypemvtStock().getLibelle())) {
+				ListMouvementNouveau.add(mvtDto);
+			}
+		}
+		int total=ListMouvementNouveau.size();
+		int nbrPages=Math.max(
+				1, (int)Math.ceil(total/(double)TAILLE_PAGE));
+		int page=pageLire.lireEntier(request.getParameter("page"), 1);
+		page=Math.min(Math.max(page, 1),nbrPages);
+		int debut=(page-1)*TAILLE_PAGE;
+		int fin=Math.min(debut+TAILLE_PAGE, total);
+		
+		request.setAttribute("reception", ListMouvementNouveau.subList(debut, fin));
+		request.setAttribute("totalreception", total);
+		
+		request.setAttribute("pageCourante", page);
+		request.setAttribute("nbPages", nbrPages);
+		
+		request.setAttribute("activePage", "reception");
+		request.setAttribute("titrePage", "ListReception");
+		request.getRequestDispatcher("/MvtReception.jsp").forward(request, response);
+	}
+	
+	private void afficherRetourFourn(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException,IOException, SQLException {
+		List<mvtStockDto> ListMouvement;
+		List<mvtStockDto> ListMouvementNouveau;
+		ListMouvementNouveau=new ArrayList<mvtStockDto>();
+		ListMouvement=mvtStockService.findAllMouvement();
+		for(mvtStockDto mvtDto: ListMouvement) {
+			if(("Retour Client").equals(mvtDto.getTypemvtStock().getLibelle())) {
+				ListMouvementNouveau.add(mvtDto);
+			}
+		}
+		int total=ListMouvementNouveau.size();
+		int nbrPages=Math.max(
+				1, (int)Math.ceil(total/(double)TAILLE_PAGE));
+		int page=pageLire.lireEntier(request.getParameter("page"), 1);
+		page=Math.min(Math.max(page, 1),nbrPages);
+		int debut=(page-1)*TAILLE_PAGE;
+		int fin=Math.min(debut+TAILLE_PAGE, total);
+		
+		request.setAttribute("retourFournisseur", ListMouvementNouveau.subList(debut, fin));
+		request.setAttribute("totalretour", total);
+		
+		request.setAttribute("pageCourante", page);
+		request.setAttribute("nbPages", nbrPages);
+		
+		request.setAttribute("activePage", "retourFournisseur");
+		request.setAttribute("titrePage", "ListretourFournisseur");
+		request.getRequestDispatcher("/MvtRetourFournisseur.jsp").forward(request, response);
 	}
 
 }

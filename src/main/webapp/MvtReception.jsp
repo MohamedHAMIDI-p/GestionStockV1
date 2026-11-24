@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Liste Mouvements de stock</title>
+<title>Liste Mouvements de Reception</title>
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/app.css">
@@ -40,7 +40,7 @@
 					</div>
 					<form id="formRechercheMvt" class="formulaire-recherche-mvt"
 						method="get"
-						action="${pageContext.request.contextPath}/listMouvement">
+						action="${pageContext.request.contextPath}/reception">
 
 						<div class="form-group">
 							<label for="codeArticle">Code article</label> <input type="text"
@@ -78,7 +78,7 @@
 							<button type="submit" class="btn-primary-mvt">
 								Rechercher</button>
 
-							<a href="${pageContext.request.contextPath}/listMouvement"
+							<a href="${pageContext.request.contextPath}/reception"
 								class="btn-secondary-mvt"> Réinitialiser </a>
 						</div>
 
@@ -91,7 +91,7 @@
 							<p>Consultez les Receptions enregistrés.</p>
 						</div>
 					</div>
-					<span class="compteur"> <c:out value="${totalMouvements}" />
+					<span class="compteur"> <c:out value="${totalreception}" />
 						mouvement(s) &middot; Page <c:out value="${pageCourante}" /> / <c:out
 							value="${nbPages}" />
 					</span>
@@ -113,7 +113,7 @@
 							</thead>
 
 							<tbody>
-								<c:forEach items="${listMouvement}" var="m">
+								<c:forEach items="${reception}" var="m">
 									<tr>
 										<td><c:out value="${m.id}" /></td>
 										<td class="nowrap"><c:out value="${m.codeArticle}" /></td>
@@ -157,7 +157,7 @@
 
 								<c:when test="${pageCourante > 1}">
 
-									<c:url var="urlPrec" value="/listMouvement">
+									<c:url var="urlPrec" value="/receptions">
 										<c:param name="page" value="${pageCourante - 1}" />
 										<c:param name="codeArticle" value="${param.codeArticle}" />
 										<c:param name="idMouvement" value="${param.idMouvement}" />
@@ -188,7 +188,7 @@
 
 									<c:otherwise>
 
-										<c:url var="urlPage" value="/listMouvement">
+										<c:url var="urlPage" value="/receptions">
 											<c:param name="page" value="${p}" />
 											<c:param name="codeArticle" value="${param.codeArticle}" />
 											<c:param name="idMouvement" value="${param.idMouvement}" />
@@ -211,7 +211,7 @@
 
 								<c:when test="${pageCourante < nbPages}">
 
-									<c:url var="urlSuiv" value="/listMouvement">
+									<c:url var="urlSuiv" value="/receptions">
 										<c:param name="page" value="${pageCourante + 1}" />
 										<c:param name="codeArticle" value="${param.codeArticle}" />
 										<c:param name="idMouvement" value="${param.idMouvement}" />
